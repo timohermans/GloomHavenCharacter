@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { CharacterSheet } from './character-sheet.class';
 
 @Component({
   selector: 'app-character-sheet',
@@ -6,10 +8,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./character-sheet.component.css']
 })
 export class CharacterSheetComponent implements OnInit {
+  form: FormGroup;
 
-  constructor() { }
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    this.form = this.formBuilder.group({
+      name: ['', Validators.required],
+      experiencePoints: [0, Validators.required],
+      experiencePointsNotes: [''],
+      gold: [0]
+    });
   }
-
 }

@@ -1,3 +1,16 @@
-<p>
-  character-sheet works!
-</p>
+<h1>sheet</h1>
+<form [formGroup]="form">
+
+  <div class="form-group">
+    <input type="text" class="form-control" formControlName="name">
+  </div>
+
+  <app-custom-counter id="divXp" formControlName="experiencePoints"></app-custom-counter>
+
+  <div class="form-group">
+    <textarea formControlName="experiencePointsNotes"></textarea>
+  </div>
+
+  <app-custom-counter id="divGold" formControlName="gold" ></app-custom-counter>
+
+</form>

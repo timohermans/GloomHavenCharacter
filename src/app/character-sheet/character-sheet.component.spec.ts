@@ -56,6 +56,10 @@ describe('CharacterSheetComponent', () => {
     click('[formControlName="gold"] .value-m-5');
     click('[formControlName="gold"] .value-1');
 
+    fillIn('textarea[formControlName="itemNotes"]', 'Great sword (+1)');
+
+    // click('.perks .perk:nth-child(1)');
+
     fixture.detectChanges();
 
     expect(component.form.valid).toBeTruthy();
@@ -66,7 +70,15 @@ describe('CharacterSheetComponent', () => {
       name: 'hallo!',
       experiencePoints: -5,
       experiencePointsNotes: '20 > 30',
-      gold: 1
+      gold: 1,
+      itemNotes: 'Great sword (+1)'
+      // ,
+      // perks: [
+      //   {
+      //     hasObtained: true,
+      //     description: 'Remove two \'-1\' cards'
+      //   }
+      // ]
     });
   });
 

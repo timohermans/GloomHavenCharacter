@@ -1,5 +1,6 @@
-import { Item } from './item.class';
-import { PerkUnlock } from './perk-unlock.class';
+import {Item} from './item.class';
+import {PerkUnlock} from './perk-unlock.class';
+import {Perk} from './perk.class';
 
 export class CharacterSheet {
   title: string;
@@ -11,5 +12,5 @@ export class CharacterSheet {
   goldNotes: string;
   items: Item[];
   perkUnlocks: PerkUnlock[];
-  // perks: Perk[]
+  perks: Perk[];
 }

@@ -5,6 +5,12 @@
     <input type="text" class="form-control" formControlName="name">
   </div>
 
+  <div id="levels">
+    <div *ngFor="let xp of xpPerLevel; let levelIndex = index" class="level" [ngClass]="{'current-level': hasCurrentLevelWith(form.controls.experiencePoints.value, levelIndex)}">
+      {{levelIndex + 1}}
+    </div>
+  </div>
+
   <app-custom-counter id="divXp" formControlName="experiencePoints"></app-custom-counter>
 
   <div class="form-group">
@@ -16,4 +22,21 @@
   <div class="form-group">
     <textarea cols="30" rows="10" formControlName="itemNotes"></textarea>
   </div>
+
+  <div class="form-group" formArrayName="perks">
+    <div class="perk" *ngFor="let perk of form.controls.perks.controls; let i = index" [formGroupName]="i">
+      <label>
+        <input type="checkbox" formControlName="hasObtained"> {{perk.controls.description.value}}
+      </label>
+    </div>
+  </div>
+
+  <div class="form-group" formArrayName="challengeSuccesses">
+    <div *ngFor="let challengeSuccess of form.controls.challengeSuccesses.controls; let i = index">
+      <input type="checkbox" [formControl]="challengeSuccess">
+    </div>
+  </div>
+
+  {{ form.getRawValue() | json }}
+
 </form>

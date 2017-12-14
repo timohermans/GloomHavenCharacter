@@ -41,31 +41,6 @@ describe('CharacterSheetComponent', () => {
     expect(component.form.valid).toBeFalsy();
   });
 
-  it('should only be possible to click a perk when unlocked', () => {
-    const firstPerkQuery = '[formArrayName="perks"] .perk input[type="checkbox"]:nth-child(1)';
-    expect(isDisabled(firstPerkQuery)).toBeTruthy('must be disabled without unlocking');
-
-    check('[formArrayName="challengeSuccesses"] div:nth-child(1) input');
-    check('[formArrayName="challengeSuccesses"] div:nth-child(2) input');
-    check('[formArrayName="challengeSuccesses"] div:nth-child(3) input');
-
-    fixture.detectChanges();
-
-    expect(isDisabled(firstPerkQuery)).toBeFalsy();
-
-    check(firstPerkQuery);
-
-    fixture.detectChanges();
-
-    const perkUnlock1 = getNativeElement('[formArrayName="challengeSuccesses"] div:nth-child(1) input') as HTMLInputElement;
-    const perkUnlock2 = getNativeElement('[formArrayName="challengeSuccesses"] div:nth-child(2) input') as HTMLInputElement;
-    const perkUnlock3 = getNativeElement('[formArrayName="challengeSuccesses"] div:nth-child(3) input') as HTMLInputElement;
-
-    expect(perkUnlock1.checked).toBeFalsy();
-    expect(perkUnlock2.checked).toBeFalsy();
-    expect(perkUnlock3.checked).toBeFalsy();
-  });
-
   it('should have a valid form when everythign filled in', () => {
     fillIn('input[formControlName="name"]', 'hallo!');
 
@@ -84,10 +59,6 @@ describe('CharacterSheetComponent', () => {
     click('[formControlName="gold"] .value-1');
 
     fillIn('textarea[formControlName="itemNotes"]', 'Great sword (+1)');
-
-    check('[formArrayName="challengeSuccesses"] div:nth-child(1) input');
-    check('[formArrayName="challengeSuccesses"] div:nth-child(2) input');
-    check('[formArrayName="challengeSuccesses"] div:nth-child(3) input');
 
     check('[formArrayName="perks"] .perk:nth-child(1) input[type="checkbox"]:nth-child(1)');
 

@@ -5,12 +5,14 @@ import {Perk} from './perk.class';
 export class CharacterSheet {
   title: string;
   name: string;
-  level: number;
+  // level: number;
   experiencePoints: number;
   experiencePointsNotes: string;
   gold: number;
-  goldNotes: string;
-  items: Item[];
-  perkUnlocks: PerkUnlock[];
+  // goldNotes: string;
+  itemNotes: string;
+  // items: Item[];
+  // perkUnlocks: PerkUnlock[];
   perks: Perk[];
+  challengeSuccesses: boolean[];
 }

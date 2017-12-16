@@ -5,7 +5,7 @@ import { disableDebugTools } from '@angular/platform-browser/src/browser/tools/t
 @Component({
   selector: 'app-custom-counter',
   templateUrl: './counter.component.html',
-  styleUrls: ['./counter.component.css'],
+  styleUrls: ['./counter.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

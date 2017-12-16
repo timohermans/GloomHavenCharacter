@@ -8,7 +8,7 @@ import * as _ from 'lodash';
 @Component({
   selector: 'app-character-sheet',
   templateUrl: './character-sheet.component.html',
-  styleUrls: ['./character-sheet.component.css']
+  styleUrls: ['./character-sheet.component.scss']
 })
 export class CharacterSheetComponent implements OnInit {
   characterSheet: CharacterSheet;

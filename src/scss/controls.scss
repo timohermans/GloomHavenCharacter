@@ -1,0 +1,10 @@
+input[type="text"] {
+  &.form-control {
+    // border-width:0 0 1px 0;
+  }
+
+  &.form-control:focus {
+    // box-shadow: inset 0px -26px 15px -25px rgba(214,0,0,0.75);
+    // box-shadow: 0px 0.1rem 0px 0px rgba(theme-color("primary"), 0.25);
+  }
+}

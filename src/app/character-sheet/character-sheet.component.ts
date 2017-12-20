@@ -5,12 +5,16 @@ import {distinctUntilKeyChanged} from 'rxjs/operators/distinctUntilKeyChanged';
 import {Perk} from './perk.class';
 import * as _ from 'lodash';
 
+import { animations } from './character-sheet.animations';
+
 @Component({
   selector: 'app-character-sheet',
   templateUrl: './character-sheet.component.html',
-  styleUrls: ['./character-sheet.component.scss']
+  styleUrls: ['./character-sheet.component.scss'],
+  animations: animations
 })
 export class CharacterSheetComponent implements OnInit {
+  currentTabName = 'general';
   characterSheet: CharacterSheet;
 
   form: FormGroup;
@@ -32,6 +36,7 @@ export class CharacterSheetComponent implements OnInit {
 
   private buildBrute() {
     const cs = new CharacterSheet();
+    cs.title = 'Inox Brute';
     cs.name = 'Andi';
     cs.experiencePoints = 50;
     cs.experiencePointsNotes = 'hoppa';
@@ -61,6 +66,7 @@ export class CharacterSheetComponent implements OnInit {
 
   private buildSheetForm() {
     this.form = this.formBuilder.group({
+      title: '',
       name: ['', Validators.required],
       experiencePoints: [0, Validators.required],
       experiencePointsNotes: [''],
@@ -127,6 +133,7 @@ export class CharacterSheetComponent implements OnInit {
     }
 
     this.form.patchValue({
+      title: this.characterSheet.title,
       name: this.characterSheet.name,
       experiencePoints: this.characterSheet.experiencePoints,
       experiencePointsNotes: this.characterSheet.experiencePointsNotes,
@@ -161,5 +168,27 @@ export class CharacterSheetComponent implements OnInit {
     });
 
     return level === levelReached;
+  }
+
+  calculateXpArrowPosition() {
+    const base = -1;
+    const positionModifier = 0.664;
+    const xp = this.form.controls.experiencePoints.value;
+
+    const position = base + (positionModifier * xp);
+
+    return `${position}px`;
+  }
+
+  isCurrent(tabName) {
+    return tabName === this.currentTabName;
+  }
+
+  getStateFrom(tabName) {
+    if (tabName === this.currentTabName) {
+      return 'active';
+    }
+
+    return 'inactive';
   }
 }

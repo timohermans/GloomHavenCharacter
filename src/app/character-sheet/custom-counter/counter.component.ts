@@ -1,6 +1,6 @@
-import { Component, OnInit, Input, forwardRef } from '@angular/core';
-import { FormControl, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { disableDebugTools } from '@angular/platform-browser/src/browser/tools/tools';
+import {Component, OnInit, Input, forwardRef} from '@angular/core';
+import {FormControl, ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {disableDebugTools} from '@angular/platform-browser/src/browser/tools/tools';
 
 @Component({
   selector: 'app-custom-counter',
@@ -15,6 +15,8 @@ import { disableDebugTools } from '@angular/platform-browser/src/browser/tools/t
   ]
 })
 export class CustomCounterComponent implements ControlValueAccessor {
+  @Input() labelText: string;
+
   counter = 0;
   isDisabled = false;
 
@@ -35,7 +37,7 @@ export class CustomCounterComponent implements ControlValueAccessor {
     this.isDisabled = isDisabled;
   }
 
-  constructor() { }
+  constructor() {}
 
   setAmount(amountToChange) {
     const newCounter = this.counter + amountToChange;

@@ -1,4 +1,6 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <router-outlet></router-outlet>
+<a routerLink="sheet">sheet</a>
+<a routerLink="monsters">monsters</a>
+<div id="main" [@routerTransition]="getState(o)">
+  <router-outlet #o="outlet"></router-outlet>
 </div>

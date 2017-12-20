@@ -1,0 +1,29 @@
+#levels {
+  text-align: center;
+
+  .level.col {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  .xp-indicator {
+    margin: -5px;
+  }
+
+  .xp-arrow {
+    position: relative;
+    height: 15px;
+
+    i {
+      position:absolute;
+    }
+  }
+
+  .current-level {
+    font-weight: bold;
+  }
+}
+
+
+
+

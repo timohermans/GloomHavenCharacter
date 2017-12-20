@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -8,15 +9,18 @@ import { CharacterSheetComponent } from './character-sheet/character-sheet.compo
 
 import { AppRoutes } from './app.router';
 import { CustomCounterComponent } from './character-sheet/custom-counter/counter.component';
+import { MonstersComponent } from './monsters/monsters.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CharacterSheetComponent,
-    CustomCounterComponent
+    CustomCounterComponent,
+    MonstersComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot(AppRoutes),
     ReactiveFormsModule
   ],

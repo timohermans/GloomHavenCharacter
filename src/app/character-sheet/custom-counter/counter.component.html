@@ -1,7 +1,40 @@
-<div class="form-group">
-  <button class="btn btn-default value-m-5" (click)="setAmount(-5)">-5</button>
-  <button class="btn btn-default value-m-1" (click)="setAmount(-1)">-1</button>
-  <input type="text" class="form-control" [value]="counter">
-  <button class="btn btn-default value-1" (click)="setAmount(1)">+1</button>
-  <button class="btn btn-default value-5" (click)="setAmount(5)">+5</button>
+<div class="form-group row">
+  <div class="col-2">
+    {{labelText}}
+  </div>
+  <div class="col-10">
+    <div class="input-group">
+      <div class="input-group-btn">
+        <button class="btn btn-primary value-m-5" (click)="setAmount(-5)">-5</button>
+      </div>
+      <div class="input-group-btn">
+        <button class="btn btn-primary value-m-1" (click)="setAmount(-1)">-1</button>
+      </div>
+      <input type="text" class="form-control" [value]="counter" readonly>
+      <div class="input-group-btn">
+        <button class="btn btn-primary value-1" (click)="setAmount(1)">+1</button>
+      </div>
+      <div class="input-group-btn">
+        <button class="btn btn-primary value-5" (click)="setAmount(5)">+5</button>
+      </div>
+    </div>
+  </div>
+  <!--
+  <div class="col-2">
+    <button class="btn btn-default value-m-5" (click)="setAmount(-5)">-5</button>
+  </div>
+  <div class="col-2">
+    <button class="btn btn-default value-m-1" (click)="setAmount(-1)">-1</button>
+  </div>
+  <div class="col-4">
+    <input type="text" class="form-control" [value]="counter">
+  </div>
+  <div class="col-2">
+    <button class="btn btn-default value-1" (click)="setAmount(1)">+1</button>
+  </div>
+  <div class="col-2">
+    <button class="btn btn-default value-5" (click)="setAmount(5)">+5</button>
+  </div>
+ -->
+
 </div>

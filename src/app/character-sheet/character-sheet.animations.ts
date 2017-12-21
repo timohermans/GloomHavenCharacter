@@ -41,32 +41,17 @@ export const animations = [
 
   trigger('flyInOut', [
     transition('* <=> *', [
-      // query(':enter, :leave', style({position: 'absolute', display: 'block'})),
-      query(':enter, :leave', style({position: 'relative', width: '100%', display: 'block'})),
+      query('.row', style({marginRight: '0px'})),
+      query(':enter, :leave, .navbar', style({position: 'fixed'})),
       group([
         query(':leave', [
-          animate(500, style({transform: 'translateX(-100%)'}))
+          animate(300, style({transform: 'translateX(-100%)'}))
         ], {optional: true}),
         query(':enter', [
           style({transform: 'translateX(100%)'}),
-          animate(500, style({transform: 'translateX(0)'}))
+          animate(300, style({transform: 'translateX(0)'}))
         ])
       ])
     ])
-    // state('active', style({transform: 'translateX(0)'})),
-    // transition('active => void', [
-    //   animate(300, style({transform: 'translateX(-100%)'}))
-    // ]),
-    // transition('void => active', [
-    //   style({transform: 'translateX(-100%)'}),
-    //   animate(300, style({transform: 'translateX(0)'}))
-    // ])
-    // transition('general => void', [
-    //   style({transform: 'translateX(-100%)'}),
-    //   animate(1000)
-    // ])
-    // transition('perks => general', [
-    //   animate(1000, style({transform: 'translateX(100%)'}))
-    // ])
   ])
 ];

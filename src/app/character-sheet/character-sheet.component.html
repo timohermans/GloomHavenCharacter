@@ -1,80 +1,82 @@
-<nav class="navbar fixed-bottom navbar-light bg-light">
-  <a class="nav-link" (click)="currentTabName = 'general'">General</a>
-  <a class="nav-link" (click)="currentTabName = 'perks'">Perks</a>
-</nav>
+<div [@flyInOut]="isCurrent('general')">
+  <nav class="navbar fixed-bottom navbar-light bg-light">
+    <a class="nav-link" (click)="currentTabName = 'general'">General</a>
+    <a class="nav-link" (click)="currentTabName = 'perks'">Perks</a>
+  </nav>
 
-<div class="container">
-  <h1>{{form.controls.title.value}}</h1>
-  <form [formGroup]="form" [@flyInOut]="isCurrent('general')">
-    <!-- <div [hidden]="!isCurrent('general')"> -->
-    <!-- <div *ngIf="isCurrent('general')" [@flyInOut]="getStateFrom('general')"> -->
-    <div *ngIf="isCurrent('general')">
-      <div class="form-group row">
-        <label class="col-2 col-form-label">Name</label>
-        <div class="col-10">
-          <input type="text" class="form-control no-border" formControlName="name">
+  <div class="container">
+    <h1>{{form.controls.title.value}}</h1>
+    <form [formGroup]="form">
+      <!-- <div [hidden]="!isCurrent('general')"> -->
+      <!-- <div *ngIf="isCurrent('general')" [@flyInOut]="getStateFrom('general')"> -->
+      <div *ngIf="isCurrent('general')">
+        <div class="form-group row">
+          <label class="col-2 col-form-label">Name</label>
+          <div class="col-10">
+            <input type="text" class="form-control no-border" formControlName="name">
+          </div>
         </div>
-      </div>
 
-      <div id="levels" class="form-group">
-        <div class="row col">
-          Level
+        <div id="levels" class="form-group">
+          <div class="row col">
+            Level
+          </div>
+          <div class="row">
+            <div *ngFor="let xp of xpPerLevel; let levelIndex = index" class="level col" [ngClass]="{'current-level': hasCurrentLevelWith(form.controls.experiencePoints.value, levelIndex)}"
+              [@levelUp]="hasCurrentLevelWith(form.controls.experiencePoints.value, levelIndex) ? 'current-level' : 'level'">
+              <div>
+                {{levelIndex + 1}}
+              </div>
+              <div class="xp-indicator">
+                ^
+              </div>
+              <div>
+                {{xp}}
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="row">
-          <div *ngFor="let xp of xpPerLevel; let levelIndex = index" class="level col" [ngClass]="{'current-level': hasCurrentLevelWith(form.controls.experiencePoints.value, levelIndex)}"
-            [@levelUp]="hasCurrentLevelWith(form.controls.experiencePoints.value, levelIndex) ? 'current-level' : 'level'">
-            <div>
-              {{levelIndex + 1}}
-            </div>
-            <div class="xp-indicator">
-              ^
-            </div>
-            <div>
-              {{xp}}
-            </div>
+
+        <app-custom-counter labelText="XP" id="divXp" formControlName="experiencePoints"></app-custom-counter>
+
+        <div class="form-group row">
+          <div class="col-2">
+            XP Notes
+          </div>
+          <div class="col-10">
+            <textarea class="form-control" formControlName="experiencePointsNotes"></textarea>
+          </div>
+        </div>
+
+        <app-custom-counter labelText="Gold" id="divGold" formControlName="gold"></app-custom-counter>
+
+        <div class="form-group row">
+          <div class="col-2">
+            Items
+          </div>
+          <div class="col-10">
+            <textarea class="form-control" cols="30" rows="5" formControlName="itemNotes"></textarea>
           </div>
         </div>
       </div>
 
-      <app-custom-counter labelText="XP" id="divXp" formControlName="experiencePoints"></app-custom-counter>
-
-      <div class="form-group row">
-        <div class="col-2">
-          XP Notes
+      <!-- <div [hidden]="!isCurrent('perks')"> -->
+      <!-- <div *ngIf="isCurrent('perks')"[@flyInOut]="getStateFrom('perks')"> -->
+      <div *ngIf="isCurrent('perks')">
+        <div class="form-group" formArrayName="perks">
+          <div class="perk" *ngFor="let perk of form.controls.perks.controls; let i = index" [formGroupName]="i">
+            <label>
+              <input type="checkbox" formControlName="hasObtained"> {{perk.controls.description.value}}
+            </label>
+          </div>
         </div>
-        <div class="col-10">
-          <textarea class="form-control" formControlName="experiencePointsNotes"></textarea>
+
+        <div class="form-group" formArrayName="challengeSuccesses">
+          <div *ngFor="let challengeSuccess of form.controls.challengeSuccesses.controls; let i = index">
+            <input type="checkbox" [formControl]="challengeSuccess">
+          </div>
         </div>
       </div>
-
-      <app-custom-counter labelText="Gold" id="divGold" formControlName="gold"></app-custom-counter>
-
-      <div class="form-group row">
-        <div class="col-2">
-          Items
-        </div>
-        <div class="col-10">
-          <textarea class="form-control" cols="30" rows="5" formControlName="itemNotes"></textarea>
-        </div>
-      </div>
-    </div>
-
-    <!-- <div [hidden]="!isCurrent('perks')"> -->
-    <!-- <div *ngIf="isCurrent('perks')"[@flyInOut]="getStateFrom('perks')"> -->
-    <div *ngIf="isCurrent('perks')">
-      <div class="form-group" formArrayName="perks">
-        <div class="perk" *ngFor="let perk of form.controls.perks.controls; let i = index" [formGroupName]="i">
-          <label>
-            <input type="checkbox" formControlName="hasObtained"> {{perk.controls.description.value}}
-          </label>
-        </div>
-      </div>
-
-      <div class="form-group" formArrayName="challengeSuccesses">
-        <div *ngFor="let challengeSuccess of form.controls.challengeSuccesses.controls; let i = index">
-          <input type="checkbox" [formControl]="challengeSuccess">
-        </div>
-      </div>
-    </div>
-  </form>
+    </form>
+  </div>
 </div>

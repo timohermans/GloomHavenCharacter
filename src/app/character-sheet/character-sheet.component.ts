@@ -5,7 +5,8 @@ import {distinctUntilKeyChanged} from 'rxjs/operators/distinctUntilKeyChanged';
 import {Perk} from './perk.class';
 import * as _ from 'lodash';
 
-import { animations } from './character-sheet.animations';
+import {animations} from './character-sheet.animations';
+import {CharacterSheetFactory, Character} from './character-sheet-template.factory';
 
 @Component({
   selector: 'app-character-sheet',
@@ -35,33 +36,7 @@ export class CharacterSheetComponent implements OnInit {
   }
 
   private buildBrute() {
-    const cs = new CharacterSheet();
-    cs.title = 'Inox Brute';
-    cs.name = 'Andi';
-    cs.experiencePoints = 50;
-    cs.experiencePointsNotes = 'hoppa';
-    cs.gold = 18;
-    cs.itemNotes = 'boots of farstriding, hide armor, potion of healing';
-    cs.challengeSuccesses = [true, false, false];
-    cs.perks = [
-      new Perk(`Remove two '-1' cards`),
-      new Perk(`Replace one '-1' card with one '+1' card`),
-      new Perk(`Add two '+1' cards`),
-      new Perk(`Add two '+1' cards`),
-      new Perk(`Add one '+3' card`),
-      new Perk(`Add three 'turn' PUSH 'push'1 card`),
-      new Perk(`Add three 'turn' PUSH 'push'1 card`),
-      new Perk(`Add one 'turn' STUN 'stun' card`),
-      new Perk(`Add one 'turn' STUN 'stun' card`),
-      new Perk(`Add two 'turn' PIERCE 'pierce'3 cards`),
-      new Perk(`Add one 'turn' DISARM 'disarm' card and one 'turn' MUDDLE 'muddle' card`),
-      new Perk(`Add one 'turn' ADD TARGET 'target' card`),
-      new Perk(`Add one 'turn' ADD TARGET 'target' card`),
-      new Perk(`Add on '+1' Shield 'shield'1, Self card`),
-      new Perk(`Ignore negative item effects and add one '+1' card`),
-    ];
-
-    this.characterSheet = cs;
+    this.characterSheet = CharacterSheetFactory.buildSheet(Character.Spellweaver);
   }
 
   private buildSheetForm() {

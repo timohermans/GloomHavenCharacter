@@ -7,8 +7,6 @@
   <div class="container">
     <h1>{{form.controls.title.value}}</h1>
     <form [formGroup]="form">
-      <!-- <div [hidden]="!isCurrent('general')"> -->
-      <!-- <div *ngIf="isCurrent('general')" [@flyInOut]="getStateFrom('general')"> -->
       <div *ngIf="isCurrent('general')">
         <div class="form-group row">
           <label class="col-2 col-form-label">Name</label>
@@ -60,8 +58,6 @@
         </div>
       </div>
 
-      <!-- <div [hidden]="!isCurrent('perks')"> -->
-      <!-- <div *ngIf="isCurrent('perks')"[@flyInOut]="getStateFrom('perks')"> -->
       <div *ngIf="isCurrent('perks')">
         <div class="form-group" formArrayName="perks">
           <div class="perk" *ngFor="let perk of form.controls.perks.controls; let i = index" [formGroupName]="i">

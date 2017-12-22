@@ -13,7 +13,7 @@ import {AngularFirestoreDocument, AngularFirestore} from 'angularfire2/firestore
 import {Observable} from 'rxjs/Observable';
 import {Subscription} from 'rxjs/Subscription';
 import 'rxjs/add/operator/debounceTime';
-
+import 'rxjs/add/operator/mergeMap';
 
 @Component({
   selector: 'app-character-sheet',
@@ -48,19 +48,17 @@ export class CharacterSheetComponent implements OnInit {
   }
 
   private loadDataFromParam() {
-    this.route.paramMap.subscribe(params => {
-      const id = params.get('id');
-
-      this.characterSheetDoc = this.db.doc<CharacterSheet>(`sheets/${id}`);
-      this.characterSheetDoc
-        .valueChanges()
-        .subscribe(sheet => {
-          this.characterSheet = sheet;
-          this.loadDataIntoForm();
-          this.setupFormValueChanges();
-        });
-    });
-
+    this.route.paramMap.flatMap(params => {
+      const docId = params.get('id');
+      this.characterSheetDoc = this.db.doc<CharacterSheet>(`sheets/${docId}`);
+      return this.characterSheetDoc
+        .valueChanges();
+    })
+      .subscribe(sheet => {
+        this.characterSheet = sheet;
+        this.loadDataIntoForm();
+        this.setupFormValueChanges();
+      });
   }
 
   private buildSheetForm() {
@@ -71,6 +69,7 @@ export class CharacterSheetComponent implements OnInit {
       experiencePointsNotes: [''],
       gold: [0],
       itemNotes: [''],
+      email: [''],
       perks: this.formBuilder.array([]),
       challengeSuccesses: this.formBuilder.array([
         false, false, false
@@ -104,12 +103,13 @@ export class CharacterSheetComponent implements OnInit {
 
   private setupFormValueChanges() {
     this.entireFormChangeSubscription = this.form.valueChanges
-    .debounceTime(500)
-    .subscribe((data) => {
-      if (!_.isEqual(data, this.characterSheet)) {
+      .debounceTime(500)
+      .filter(data => {
+        return !_.isEqual(data, this.characterSheet);
+      })
+      .subscribe((data) => {
         this.characterSheetDoc.update(data);
-      }
-    });
+      });
 
     this.perkFormChangeSubscription = this.form.controls.perks.valueChanges
       .subscribe((data) => {

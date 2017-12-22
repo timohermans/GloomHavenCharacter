@@ -1,12 +1,13 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<a id="btnSidebar" (click)="isMenuOpen = !isMenuOpen" (window:click)="windowClick($event)">menu</a>
+<a id="btnSidebar" *ngIf="isLoggedIn()" (click)="isMenuOpen = !isMenuOpen" (window:click)="windowClick($event)">menu</a>
 
-<!-- <div id="sidebar" *ngIf="isMenuOpen" [@sidebarSlide]="isMenuOpen ? 'open' : 'closed'"> -->
 <div id="sidebar" *ngIf="isMenuOpen" @sidebarSlide>
   <div id="menuItems" class="list-group">
     <div class="list-group-item" (click)="isMenuOpen = false"><h4>Gloomhaven</h4></div>
+      <a class="list-group-item list-group-item-action" routerLink="players">players</a>
       <a class="list-group-item list-group-item-action" routerLink="sheet">sheet</a>
       <a class="list-group-item list-group-item-action" routerLink="monsters">monsters</a>
+      <a class="list-group-item list-group-item-action" (click)="logout()">logout</a>
   </div>
 </div>
 

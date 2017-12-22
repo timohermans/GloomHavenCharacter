@@ -12,7 +12,7 @@ export const animations = [
   trigger('routerTransition', [
     // but anytime a route changes let's animate!
     transition('* => *', [
-      query(':enter, :leave', style({display: 'block', position: 'absolute'}), {optional: true}),
+      query(':enter, :leave', style({width: '100%', display: 'block', position: 'absolute'}), {optional: true}),
       group([
         query(':enter', [
           style({opacity: 0}),

@@ -1,0 +1,19 @@
+<div id="createSheetPopup" *ngIf="isSheetCreationOpen" class="list-group">
+  <a class="list-group-item list-group-item-action" *ngFor="let template of characterTemplates" (click)="addSheet(template.character)">{{template.character}}</a>
+</div>
+
+<nav class="navbar fixed-bottom navbar-light bg-light">
+  <a class="nav-link" (click)="isSheetCreationOpen = !isSheetCreationOpen">Add</a>
+</nav>
+
+<div class="container">
+  <div *ngIf="!sheets">
+    No players yet!
+  </div>
+
+  <div id="players" class="list-group" *ngIf="sheets">
+    <a *ngFor="let sheet of sheets | async" class="list-group-item list-group-item-action" [routerLink]="getRouterLinkWith(player)">
+      {{sheet.name || 'unnamed'}} - {{sheet.title}}
+    </a>
+  </div>
+</div>

@@ -1,9 +1,4 @@
-export class Perk {
+export interface Perk {
   description: string;
-  hasObtained: boolean;
-
-  constructor(description: string) {
-    this.description = description;
-    this.hasObtained = false;
-  }
+  hasObtained?: boolean;
 }

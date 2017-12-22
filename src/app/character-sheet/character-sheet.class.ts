@@ -2,7 +2,7 @@ import {Item} from './item.class';
 import {PerkUnlock} from './perk-unlock.class';
 import {Perk} from './perk.class';
 
-export class CharacterSheet {
+export interface CharacterSheet {
   title: string;
   name: string;
   // level: number;
@@ -15,4 +15,5 @@ export class CharacterSheet {
   // perkUnlocks: PerkUnlock[];
   perks: Perk[];
   challengeSuccesses: boolean[];
+  email?: string;
 }

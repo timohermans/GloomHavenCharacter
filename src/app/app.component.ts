@@ -1,8 +1,9 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import * as _ from 'lodash';
 
 import {routerTransition} from './router/router.animation';
 import { animations } from './app.animations';
+import {StorageService} from './storage/storage.service';
 
 @Component({
   selector: 'app-root',
@@ -10,10 +11,17 @@ import { animations } from './app.animations';
   styleUrls: ['./app.component.scss'],
   animations: animations
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'app';
 
   public isMenuOpen = false;
+
+  constructor(private storageService: StorageService) {}
+
+  ngOnInit(): void {
+      this.storageService.initialize();
+      this.storageService.handleAuthentication();
+  }
 
   getState(outlet) {
     return outlet.activatedRouteData['state'];
@@ -38,5 +46,13 @@ export class AppComponent {
 
 
     console.log($event);
+  }
+
+  isLoggedIn(): boolean {
+    return this.storageService.isLoggedIn();
+  }
+
+  logout(): void {
+    this.storageService.logout();
   }
 }

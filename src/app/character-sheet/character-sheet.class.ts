@@ -3,6 +3,7 @@ import {PerkUnlock} from './perk-unlock.class';
 import {Perk} from './perk.class';
 
 export interface CharacterSheet {
+  id?: string;
   title: string;
   name: string;
   // level: number;

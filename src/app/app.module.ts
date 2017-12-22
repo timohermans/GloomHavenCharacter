@@ -10,7 +10,7 @@ import {CharacterSheetComponent} from './character-sheet/character-sheet.compone
 import {AppRoutes} from './app.router';
 import {CustomCounterComponent} from './character-sheet/custom-counter/counter.component';
 import {MonstersComponent} from './monsters/monsters.component';
-import {PlayersComponent} from './players/players.component';
+import {SheetsComponent} from './sheets/sheets.component';
 import {LoginComponent} from './login/login.component';
 import {AngularFireModule} from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
@@ -24,7 +24,7 @@ import {AuthGuard} from './router/router.guard';
     CharacterSheetComponent,
     CustomCounterComponent,
     MonstersComponent,
-    PlayersComponent,
+    SheetsComponent,
     LoginComponent
   ],
   imports: [

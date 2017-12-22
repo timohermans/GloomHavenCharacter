@@ -12,7 +12,7 @@
   </div>
 
   <div id="players" class="list-group" *ngIf="sheets">
-    <a *ngFor="let sheet of sheets | async" class="list-group-item list-group-item-action" [routerLink]="getRouterLinkWith(player)">
+    <a *ngFor="let sheet of sheets | async" class="list-group-item list-group-item-action" [routerLink]="getRouterLinkWith(sheet)">
       {{sheet.name || 'unnamed'}} - {{sheet.title}}
     </a>
   </div>

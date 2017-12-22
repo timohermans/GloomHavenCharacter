@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection} from 'angularfire2/firestore';
 import * as _ from 'lodash';
 
-import {Player} from './player.interface';
 import {CharacterSheetFactory, Character} from '../character-sheet/character-sheet-template.factory';
 import {Observable} from 'rxjs/Observable';
 import {CharacterSheet} from '../character-sheet/character-sheet.class';
@@ -14,10 +13,10 @@ interface CharacterTemplate {
 
 @Component({
   selector: 'app-players',
-  templateUrl: './players.component.html',
-  styleUrls: ['./players.component.scss']
+  templateUrl: './sheets.component.html',
+  styleUrls: ['./sheets.component.scss']
 })
-export class PlayersComponent implements OnInit {
+export class SheetsComponent implements OnInit {
   isSheetCreationOpen = false;
   characterTemplates: CharacterTemplate[] = [];
   sheetsCollection: AngularFirestoreCollection<CharacterSheet>;
@@ -30,7 +29,16 @@ export class PlayersComponent implements OnInit {
       'sheets',
       ref => ref.where('email', '==', this.storageService.userLoggedIn.email));
 
-    this.sheets = this.sheetsCollection.valueChanges();
+    this.sheets = this.sheetsCollection
+                    .snapshotChanges()
+                    .map(values => {
+                      return values.map(value => {
+                        const data = value.payload.doc.data() as CharacterSheet;
+                        data.id = value.payload.doc.id;
+                        return data;
+                      });
+                    });
+
 
     for (const character of _.keys(Character)) {
       if (isNaN(+character)) {
@@ -43,9 +51,8 @@ export class PlayersComponent implements OnInit {
     console.log(this.characterTemplates);
   }
 
-  public getRouterLinkWith(player: Player) {
-    // return `/sheet/${player.id}`;
-    return `/sheet`;
+  public getRouterLinkWith(sheet: CharacterSheet) {
+    return `/sheet/${sheet.id}`;
   }
 
   public addSheet(character: string) {

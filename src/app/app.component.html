@@ -4,9 +4,7 @@
 <div id="sidebar" *ngIf="isMenuOpen" @sidebarSlide>
   <div id="menuItems" class="list-group">
     <div class="list-group-item" (click)="isMenuOpen = false"><h4>Gloomhaven</h4></div>
-      <a class="list-group-item list-group-item-action" routerLink="players">players</a>
-      <a class="list-group-item list-group-item-action" routerLink="sheet">sheet</a>
-      <a class="list-group-item list-group-item-action" routerLink="monsters">monsters</a>
+      <a class="list-group-item list-group-item-action" routerLink="sheets">sheets</a>
       <a class="list-group-item list-group-item-action" (click)="logout()">logout</a>
   </div>
 </div>

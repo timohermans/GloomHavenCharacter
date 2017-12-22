@@ -1,12 +1,19 @@
 import {Component, OnInit, OnChanges, Input} from '@angular/core';
 import {FormGroup, FormBuilder, Validators, FormArray} from '@angular/forms';
-import {CharacterSheet} from './character-sheet.class';
+import {ActivatedRoute} from '@angular/router';
 import {distinctUntilKeyChanged} from 'rxjs/operators/distinctUntilKeyChanged';
-import {Perk} from './perk.class';
 import * as _ from 'lodash';
+
+import {CharacterSheet} from './character-sheet.class';
+import {Perk} from './perk.class';
 
 import {animations} from './character-sheet.animations';
 import {CharacterSheetFactory, Character} from './character-sheet-template.factory';
+import {AngularFirestoreDocument, AngularFirestore} from 'angularfire2/firestore';
+import {Observable} from 'rxjs/Observable';
+import {Subscription} from 'rxjs/Subscription';
+import 'rxjs/add/operator/debounceTime';
+
 
 @Component({
   selector: 'app-character-sheet',
@@ -16,27 +23,44 @@ import {CharacterSheetFactory, Character} from './character-sheet-template.facto
 })
 export class CharacterSheetComponent implements OnInit {
   currentTabName = 'general';
+
+  private characterSheetDoc: AngularFirestoreDocument<CharacterSheet>;
   characterSheet: CharacterSheet;
+
+  private entireFormChangeSubscription: Subscription;
+  private perkFormChangeSubscription: Subscription;
 
   form: FormGroup;
   xpPerLevel: number[];
 
   private amountOfPerksUnlocked = 0;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
+    private db: AngularFirestore) {}
 
   ngOnInit() {
-    this.buildBrute();
     this.buildSheetForm();
     this.initExperiencePerLevel();
-    this.addPerks();
     this.countAmountOfPerksUnlocked();
-    this.setupFormValueChanges();
-    this.loadDataIntoForm();
+    this.loadDataFromParam();
   }
 
-  private buildBrute() {
-    this.characterSheet = CharacterSheetFactory.buildSheet(Character.Spellweaver);
+  private loadDataFromParam() {
+    this.route.paramMap.subscribe(params => {
+      const id = params.get('id');
+
+      this.characterSheetDoc = this.db.doc<CharacterSheet>(`sheets/${id}`);
+      this.characterSheetDoc
+        .valueChanges()
+        .subscribe(sheet => {
+          this.characterSheet = sheet;
+          this.loadDataIntoForm();
+          this.setupFormValueChanges();
+        });
+    });
+
   }
 
   private buildSheetForm() {
@@ -79,15 +103,15 @@ export class CharacterSheetComponent implements OnInit {
   }
 
   private setupFormValueChanges() {
-    this.form.controls.challengeSuccesses.valueChanges.subscribe((data) => {
-      // if (!this.isUnableToUnlockPerk) {
-      //   this.form.controls.perks.enable();
-      // } else if (this.form.controls.perks.disabled) {
-      //   this.form.controls.perks.disable();
-      // }
+    this.entireFormChangeSubscription = this.form.valueChanges
+    .debounceTime(500)
+    .subscribe((data) => {
+      if (!_.isEqual(data, this.characterSheet)) {
+        this.characterSheetDoc.update(data);
+      }
     });
 
-    this.form.controls.perks.valueChanges
+    this.perkFormChangeSubscription = this.form.controls.perks.valueChanges
       .subscribe((data) => {
         if (_.some(this.form.controls.challengeSuccesses.value, c => c === false)) {
           return;

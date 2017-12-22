@@ -9,7 +9,7 @@ import {AuthGuard} from './router/router.guard';
 const appRoutes = [
   {path: 'login', component: LoginComponent, data: {state: 'login'}},
   {path: 'sheets', component: SheetsComponent, canActivate: [AuthGuard], data: {state: 'players'}},
-  {path: 'sheet/:id', component: SheetsComponent, canActivate: [AuthGuard], data: {state: 'players'}},
+  {path: 'sheet/:id', component: CharacterSheetComponent, canActivate: [AuthGuard], data: {state: 'players'}},
 ];
 
 export const AppRoutes = appRoutes;

@@ -35,7 +35,7 @@ export class StorageService {
 
   startFirebaseLogin(id: string): void {
     this.firebaseUiConfig = {
-      signInSuccessUrl: '/players',
+      signInSuccessUrl: '/sheets',
       signInOptions: [
         // Leave the lines as is for the providers you want to offer your users.
         firebase.auth.EmailAuthProvider.PROVIDER_ID,
@@ -62,7 +62,7 @@ export class StorageService {
           };
 
           if (_.isNil(this.userLoggedIn)) {
-            this.router.navigate(['/players']);
+            this.router.navigate(['/sheets']);
           }
 
           this.userLoggedIn = userLoggedIn;

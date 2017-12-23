@@ -10,7 +10,7 @@ const appRoutes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent, data: {state: 'login'}},
   {path: 'sheets', component: SheetsComponent, canActivate: [AuthGuard], data: {state: 'players'}},
-  {path: 'sheet/:id', component: CharacterSheetComponent, canActivate: [AuthGuard], data: {state: 'players'}},
+  {path: 'sheet/:id', component: CharacterSheetComponent, canActivate: [AuthGuard], data: {state: 'sheet'}},
 ];
 
 export const AppRoutes = appRoutes;

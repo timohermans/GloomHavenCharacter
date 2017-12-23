@@ -137,7 +137,8 @@ export class CharacterSheetComponent implements OnInit {
       experiencePoints: this.characterSheet.experiencePoints,
       experiencePointsNotes: this.characterSheet.experiencePointsNotes,
       gold: this.characterSheet.gold,
-      itemNotes: this.characterSheet.itemNotes
+      itemNotes: this.characterSheet.itemNotes,
+      email: this.characterSheet.email
     });
 
     if (this.characterSheet.challengeSuccesses) {

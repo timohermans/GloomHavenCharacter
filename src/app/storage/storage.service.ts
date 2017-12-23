@@ -29,10 +29,6 @@ export class StorageService {
   constructor(private router: Router) {
   }
 
-  initialize(): void {
-    firebase.initializeApp(StorageService.config);
-  }
-
   startFirebaseLogin(id: string): void {
     this.firebaseUiConfig = {
       signInSuccessUrl: '/sheets',

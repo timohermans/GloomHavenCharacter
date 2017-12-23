@@ -19,8 +19,6 @@ export class AppComponent implements OnInit {
   constructor(private storageService: StorageService) {}
 
   ngOnInit(): void {
-    this.storageService.initialize();
-    this.storageService.handleAuthentication();
   }
 
   getState(outlet) {

@@ -8,17 +8,11 @@
     <h2>{{form.controls.title.value}}</h2>
     <form [formGroup]="form">
       <div *ngIf="isCurrent('general')">
-        <div class="form-group row">
-          <label class="col-2 col-form-label">Name</label>
-          <div class="col-10">
-            <input type="text" class="form-control no-border" formControlName="name">
-          </div>
+        <div class="form-group">
+          <input type="text" class="form-control no-border" formControlName="name" placeholder="Enter a name">
         </div>
 
         <div id="levels" class="form-group">
-          <div class="row col">
-            Level
-          </div>
           <div class="row">
             <div *ngFor="let xp of xpPerLevel; let levelIndex = index" class="level col" [ngClass]="{'current-level': hasCurrentLevelWith(form.controls.experiencePoints.value, levelIndex)}"
               [@levelUp]="hasCurrentLevelWith(form.controls.experiencePoints.value, levelIndex) ? 'current-level' : 'level'">

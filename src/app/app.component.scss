@@ -1,6 +1,8 @@
+@import '../scss/variables.scss';
+
 #sidebar {
   position: fixed;
-  background-color: white;
+  background-color: $white;
   top: 0;
   left: 0;
   width: 70%;
@@ -9,3 +11,14 @@
   z-index: 2030;
 }
 
+#navbar {
+  background-color: $white;
+  position: relative;
+  height: 56px;
+
+  .logo {
+    left: 50%;
+    position: absolute;
+    margin-left: -50px;
+  }
+}

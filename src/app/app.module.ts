@@ -20,7 +20,7 @@ import {AuthGuard} from './router/router.guard';
 
 import * as firebase from 'firebase';
 
-function initFirebase() {
+export function initFirebase() {
   return () => {
     return new Promise((resolve) => {
       const config = {
@@ -46,7 +46,7 @@ function initFirebase() {
             this.userLoggedIn = userLoggedIn;
           });
         }
-      resolve();
+        resolve();
       }, function (error) {
         console.log(error);
       });

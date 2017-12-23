@@ -1,3 +1,29 @@
+@import '../../scss/variables.scss';
+
+nav {
+  background-color:$white;
+  padding: 0;
+  height: 56px;
+  line-height: 36px;
+  text-align: center;
+  box-shadow: 0px -0.1px 10px gray;
+
+  .nav-link {
+    height: 100%;
+    width: 50%;
+  }
+
+  .active {
+    // border-bottom-width: 2px;
+    // border-bottom-color: $primary;
+    // border-bottom-style: solid;
+    border-top-width: 2px;
+    border-top-color: $primary;
+    border-top-style: solid;
+
+  }
+}
+
 .container {
   padding-bottom: 56px;
 }

@@ -1,3 +1,16 @@
 .counter-label {
   text-align: center;
 }
+
+nav {
+  padding: 0;
+  height: 56px;
+  line-height: 36px;
+  text-align: center;
+
+  .nav-link {
+    height: 100%;
+    width: 50%;
+  }
+}
+

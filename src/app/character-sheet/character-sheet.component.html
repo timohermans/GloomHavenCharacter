@@ -1,9 +1,10 @@
-<div [@flyInOut]="isCurrent('general')">
-  <nav class="navbar fixed-bottom navbar-light bg-light">
-    <a class="nav-link" (click)="currentTabName = 'general'">General</a>
-    <a class="nav-link" (click)="currentTabName = 'perks'">Perks</a>
-  </nav>
+<nav class="navbar fixed-bottom navbar-light">
+  <!-- <nav class="navbar navbar-light"> -->
+  <a class="nav-link" [ngClass]="{ 'active': isCurrent('general') }" (click)="currentTabName = 'general'">General</a>
+  <a class="nav-link" [ngClass]="{ 'active': isCurrent('perks') }" (click)="currentTabName = 'perks'">Perks</a>
+</nav>
 
+<div [@flyInOut]="isCurrent('general')">
   <div class="container">
     <h2>{{form.controls.title.value}}</h2>
     <form [formGroup]="form">

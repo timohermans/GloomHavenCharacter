@@ -2,8 +2,8 @@
   <a class="list-group-item list-group-item-action" *ngFor="let template of characterTemplates" (click)="addSheet(template.character)">{{template.character}}</a>
 </div>
 
-<nav class="navbar fixed-bottom navbar-light bg-light">
-  <a class="nav-link" (click)="isSheetCreationOpen = !isSheetCreationOpen">Add</a>
+<nav class="navbar fixed-bottom navbar-light">
+  <a class="nav-link active" (click)="isSheetCreationOpen = !isSheetCreationOpen">Add</a>
 </nav>
 
 <div class="container">

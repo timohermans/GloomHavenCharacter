@@ -42,8 +42,6 @@ export function initFirebase() {
               email: user.email,
               token: accessToken
             };
-
-            this.userLoggedIn = userLoggedIn;
           });
         }
         resolve();

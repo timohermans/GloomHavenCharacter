@@ -24,40 +24,45 @@ import 'rxjs/add/operator/mergeMap';
 export class CharacterSheetComponent implements OnInit {
   currentTabName = 'general';
 
-  private characterSheetDoc: AngularFirestoreDocument<CharacterSheet>;
+  form: FormGroup;
   characterSheet: CharacterSheet;
+
+  private characterSheetDoc: AngularFirestoreDocument<CharacterSheet>;
+  private isSheetChangedFromInsideApplication = false;
 
   private entireFormChangeSubscription: Subscription;
   private perkFormChangeSubscription: Subscription;
 
-  form: FormGroup;
-  xpPerLevel: number[];
 
   private amountOfPerksUnlocked = 0;
+  xpPerLevel: number[];
 
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private db: AngularFirestore) {}
+    private db: AngularFirestore) { }
 
   ngOnInit() {
     this.buildSheetForm();
     this.initExperiencePerLevel();
     this.countAmountOfPerksUnlocked();
     this.loadDataFromParam();
+    this.setupFormValueChanges();
   }
 
   private loadDataFromParam() {
     this.route.paramMap.flatMap(params => {
       const docId = params.get('id');
       this.characterSheetDoc = this.db.doc<CharacterSheet>(`sheets/${docId}`);
-      return this.characterSheetDoc
-        .valueChanges();
+      return this.characterSheetDoc.valueChanges();
     })
       .subscribe(sheet => {
-        this.characterSheet = sheet;
-        this.loadDataIntoForm();
-        this.setupFormValueChanges();
+        if (!this.isSheetChangedFromInsideApplication) {
+          this.characterSheet = sheet;
+          this.loadDataIntoForm();
+        } else {
+          this.isSheetChangedFromInsideApplication = false;
+        }
       });
   }
 
@@ -108,6 +113,7 @@ export class CharacterSheetComponent implements OnInit {
         return !_.isEqual(data, this.characterSheet);
       })
       .subscribe((data) => {
+        this.isSheetChangedFromInsideApplication = true;
         this.characterSheetDoc.update(data);
       });
 

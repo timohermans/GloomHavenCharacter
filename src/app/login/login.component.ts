@@ -24,6 +24,12 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.storageService.watchAuthChanges();
+
+    if (this.storageService.isLoggedIn()) {
+      this.router.navigate(['/sheets']);
+    }
+
     this.form = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -32,7 +38,6 @@ export class LoginComponent implements OnInit {
 
   login(): void {
     const loginValue = this.form.value as LoginViewModel;
-
 
     this.storageService.login(loginValue.username, loginValue.password)
       .then((response) => {

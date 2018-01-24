@@ -20,16 +20,15 @@ export class StorageService {
     messagingSenderId: '493813395914'
   };
 
-  public currentUser: any;
+  public get currentUser(): any {
+    return this.firebaseAuth.auth.currentUser;
+  }
 
   constructor(private router: Router, private firebaseAuth: AngularFireAuth) {
   }
 
   login(username: string, password: string): Promise<any> {
-    return this.firebaseAuth.auth.signInWithEmailAndPassword(username, password)
-              .then((user) => {
-                this.currentUser = user;
-              });
+    return this.firebaseAuth.auth.signInWithEmailAndPassword(username, password);
   }
 
   isLoggedIn(): boolean {
@@ -39,5 +38,13 @@ export class StorageService {
   logout(): void {
     this.firebaseAuth.auth.signOut();
     this.router.navigateByUrl('/login');
+  }
+
+  watchAuthChanges() {
+    this.firebaseAuth.authState.subscribe((user) => {
+      if (!_.isNil(user)) {
+        this.router.navigateByUrl('/sheets');
+      }
+    });
   }
 }

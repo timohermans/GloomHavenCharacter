@@ -1,5 +1,16 @@
-import {Component, OnInit} from '@angular/core';
-import {StorageService} from '../storage/storage.service';
+// import {Component, OnInit} from '@angular/core';
+// import {StorageService} from '../storage/storage.service';
+
+import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { StorageService } from '../storage/storage.service';
+
+interface LoginViewModel {
+  username: string;
+  password: string;
+}
 
 @Component({
   selector: 'app-login',
@@ -7,10 +18,25 @@ import {StorageService} from '../storage/storage.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  constructor(private storageService: StorageService) {}
+  form: FormGroup;
 
-  ngOnInit() {
-    this.storageService.startFirebaseLogin('#firebaseui-auth-container');
+  constructor(private storageService: StorageService, private formBuilder: FormBuilder, private router: Router) {
   }
 
+  ngOnInit() {
+    this.form = this.formBuilder.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required]
+    });
+  }
+
+  login(): void {
+    const loginValue = this.form.value as LoginViewModel;
+
+
+    this.storageService.login(loginValue.username, loginValue.password)
+      .then((response) => {
+        this.router.navigate(['/sheets']);
+      });
+  }
 }

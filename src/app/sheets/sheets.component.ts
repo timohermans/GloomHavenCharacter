@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection} from 'angularfire2/firestore';
 import * as _ from 'lodash';
-import * as firebase from 'firebase';
 
 import {CharacterSheetFactory, Character} from '../character-sheet/character-sheet-template.factory';
 import {Observable} from 'rxjs/Observable';
 import {CharacterSheet} from '../character-sheet/character-sheet.class';
+import { StorageService } from '../storage/storage.service';
 
 interface CharacterTemplate {
   character: string;
@@ -22,12 +22,12 @@ export class SheetsComponent implements OnInit {
   sheetsCollection: AngularFirestoreCollection<CharacterSheet>;
   sheets: Observable<CharacterSheet[]>;
 
-  constructor(private db: AngularFirestore) {}
+  constructor(private db: AngularFirestore, private storageService: StorageService) {}
 
   ngOnInit() {
     this.sheetsCollection = this.db.collection<CharacterSheet>(
       'sheets',
-      ref => ref.where('email', '==', firebase.auth().currentUser.email));
+      ref => ref.where('email', '==', this.storageService.currentUser.email));
 
     this.sheets = this.sheetsCollection
                     .snapshotChanges()
@@ -57,7 +57,7 @@ export class SheetsComponent implements OnInit {
 
   public addSheet(character: string) {
     const sheet = CharacterSheetFactory.buildSheet(Character[character]);
-    sheet.email = firebase.auth().currentUser.email;
+    sheet.email = this.storageService.currentUser.email;
 
     this.sheetsCollection.add(sheet);
     this.isSheetCreationOpen = false;

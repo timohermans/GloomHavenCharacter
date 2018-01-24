@@ -1,17 +1,17 @@
-import {Component, OnInit, OnChanges, Input} from '@angular/core';
-import {FormGroup, FormBuilder, Validators, FormArray} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
-import {distinctUntilKeyChanged} from 'rxjs/operators/distinctUntilKeyChanged';
+import { Component, OnInit, OnChanges, Input } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { distinctUntilKeyChanged } from 'rxjs/operators/distinctUntilKeyChanged';
 import * as _ from 'lodash';
 
-import {CharacterSheet} from './character-sheet.class';
-import {Perk} from './perk.class';
+import { CharacterSheet } from './character-sheet.class';
+import { Perk } from './perk.class';
 
-import {animations} from './character-sheet.animations';
-import {CharacterSheetFactory, Character} from './character-sheet-template.factory';
-import {AngularFirestoreDocument, AngularFirestore} from 'angularfire2/firestore';
-import {Observable} from 'rxjs/Observable';
-import {Subscription} from 'rxjs/Subscription';
+import { animations } from './character-sheet.animations';
+import { CharacterSheetFactory, Character } from './character-sheet-template.factory';
+import { AngularFirestoreDocument, AngularFirestore } from 'angularfire2/firestore';
+import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/mergeMap';
 
@@ -101,7 +101,7 @@ export class CharacterSheetComponent implements OnInit {
 
     _.each(perks, (perk) => {
       if (perk.hasObtained) {
-        this.amountOfPerksUnlocked += 1;
+       this.amountOfPerksUnlocked += 1;
       }
     });
   }

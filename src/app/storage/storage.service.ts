@@ -1,8 +1,7 @@
-import {Injectable} from '@angular/core';
-import * as firebase from 'firebase';
-import * as firebaseui from 'firebaseui';
+import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 interface User {
   displayName: string;
@@ -21,63 +20,24 @@ export class StorageService {
     messagingSenderId: '493813395914'
   };
 
-  userLoggedIn: User;
-  firebaseUiConfig: any;
-  firebaseUi: any;
-  db: any;
+  public currentUser: any;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private firebaseAuth: AngularFireAuth) {
   }
 
-  startFirebaseLogin(id: string): void {
-    this.firebaseUiConfig = {
-      signInSuccessUrl: '/sheets',
-      signInOptions: [
-        // Leave the lines as is for the providers you want to offer your users.
-        firebase.auth.EmailAuthProvider.PROVIDER_ID,
-      ],
-      credentialHelper: firebaseui.auth.CredentialHelper.NONE
-      // Terms of service url.
-      // tosUrl: '<your-tos-url>'
-    };
-
-    if (!this.firebaseUi) {
-      this.firebaseUi = new firebaseui.auth.AuthUI(firebase.auth());
-    }
-    this.firebaseUi.start(id, this.firebaseUiConfig);
-  }
-
-  handleAuthentication(): void {
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        user.getIdToken().then((accessToken) => {
-          const userLoggedIn = {
-            displayName: user.displayName,
-            email: user.email,
-            token: accessToken
-          };
-
-          if (_.isNil(this.userLoggedIn)) {
-            this.router.navigate(['/sheets']);
-          }
-
-          this.userLoggedIn = userLoggedIn;
-        });
-      } else {
-        this.router.navigateByUrl('/login');
-      }
-    }, function (error) {
-      console.log(error);
-    });
+  login(username: string, password: string): Promise<any> {
+    return this.firebaseAuth.auth.signInWithEmailAndPassword(username, password)
+              .then((user) => {
+                this.currentUser = user;
+              });
   }
 
   isLoggedIn(): boolean {
-    return !!firebase.auth().currentUser;
+    return !_.isNil(this.firebaseAuth.auth.currentUser);
   }
 
   logout(): void {
-    this.userLoggedIn = null;
-    firebase.auth().signOut();
+    this.firebaseAuth.auth.signOut();
     this.router.navigateByUrl('/login');
   }
 }

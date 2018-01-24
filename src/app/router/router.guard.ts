@@ -1,14 +1,16 @@
 import {Injectable} from '@angular/core';
 import {CanActivate, Router} from '@angular/router';
-import {StorageService} from '../storage/storage.service';
+import { AngularFireAuth } from 'angularfire2/auth';
+
+import * as _ from 'lodash';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
 
-  constructor(private storageService: StorageService, private router: Router) {}
+  constructor(private firebaseAuth: AngularFireAuth, private router: Router) {}
 
   canActivate() {
-    if (this.storageService.isLoggedIn()) {
+    if (!_.isNil(this.firebaseAuth.auth.currentUser)) {
       return true;
     }
 

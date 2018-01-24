@@ -1,0 +1,26 @@
+<div class="container">
+  <h1>Dungeon tracker</h1>
+  <form [formGroup]="form">
+    <div class="form-group">
+        <app-custom-counter labelText="HP" id="divHp" formControlName="hp"></app-custom-counter>
+    </div>
+
+    <div class="form-group">
+        <app-custom-counter labelText="XP" id="divXp" formControlName="xp"></app-custom-counter>
+    </div>
+
+    <div class="form-group">
+        <app-custom-counter labelText="tokens" id="divTokens" formControlName="tokens"></app-custom-counter>
+    </div>
+
+    <div class="form-group">
+        <app-custom-counter labelText="kills" id="divKills" formControlName="kills"></app-custom-counter>
+    </div>
+
+    <div class="form-group">
+      <button class="btn btn-default" (click)="reset()">Reset</button>
+    </div>
+
+
+  </form>
+</div>

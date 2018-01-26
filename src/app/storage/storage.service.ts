@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
+import {Observable} from 'rxjs/Observable';
 
 interface User {
   displayName: string;
@@ -40,11 +41,7 @@ export class StorageService {
     this.router.navigateByUrl('/login');
   }
 
-  watchAuthChanges() {
-    this.firebaseAuth.authState.subscribe((user) => {
-      if (!_.isNil(user)) {
-        this.router.navigateByUrl('/sheets');
-      }
-    });
+  watchAuthChanges(): Observable<any> {
+    return this.firebaseAuth.authState;
   }
 }

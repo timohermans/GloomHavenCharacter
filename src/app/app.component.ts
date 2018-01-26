@@ -25,48 +25,8 @@ export class AppComponent implements OnInit {
     return outlet.activatedRouteData['state'];
   }
 
-  windowClick($event: any) {
-    if (!this.isMenuOpen) {
-      return;
-    }
-
-    const path = this.composedPath($event.target);
-
-    const isSidebarClicked = _.find(path, (element) => {
-      return element.id === 'sidebar' || element.id === 'btnSidebar';
-    });
-
-    if (!isSidebarClicked) {
+  closeMenu(): void {
       this.isMenuOpen = false;
-    }
-
-    if ($event.target instanceof HTMLAnchorElement && $event.target.parentElement.id === 'menuItems') {
-      this.isMenuOpen = false;
-    }
-
-
-    console.log($event);
-  }
-
-  composedPath(el) {
-    const path = [];
-
-    while (el) {
-
-      path.push(el);
-
-      if (el.tagName === 'HTML') {
-
-        path.push(document);
-        path.push(window);
-
-        return path;
-      }
-
-      el = el.parentElement;
-    }
-
-    return path;
   }
 
   isLoggedIn(): boolean {

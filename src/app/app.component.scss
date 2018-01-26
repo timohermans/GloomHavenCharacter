@@ -8,8 +8,17 @@
   width: 70%;
   height: 100%;
   box-shadow: 1px 0px 5px grey;
-
   z-index: 2030;
+}
+
+#sidebarOverlay {
+  position: fixed;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  z-index: 2029;
+  opacity: 0.5;
 }
 
 #navbar {

@@ -1,11 +1,11 @@
 // import {Component, OnInit} from '@angular/core';
 // import {StorageService} from '../storage/storage.service';
 
-import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
-import { StorageService } from '../storage/storage.service';
+import {Component, OnInit} from '@angular/core';
+import {AngularFireAuth} from 'angularfire2/auth';
+import {FormBuilder, Validators, FormGroup} from '@angular/forms';
+import {Router} from '@angular/router';
+import {StorageService} from '../storage/storage.service';
 
 interface LoginViewModel {
   username: string;
@@ -24,11 +24,12 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.storageService.watchAuthChanges();
-
-    if (this.storageService.isLoggedIn()) {
-      this.router.navigate(['/sheets']);
-    }
+    this.storageService.watchAuthChanges()
+      .subscribe((user) => {
+        if (user) {
+          this.router.navigate(['/sheets']);
+        }
+      });
 
     this.form = this.formBuilder.group({
       username: ['', Validators.required],

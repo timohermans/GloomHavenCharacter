@@ -4,7 +4,7 @@
   <a class="nav-link" [ngClass]="{ 'active': isCurrent('perks') }" (click)="currentTabName = 'perks'">Perks</a>
 </nav>
 
-<div [@flyInOut]="isCurrent('general')">
+<div [@flyInOut]="currentTabName">
   <div class="container">
     <h2>{{form.controls.title.value}}</h2>
     <form [formGroup]="form">

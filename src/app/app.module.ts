@@ -20,6 +20,7 @@ import {StorageService} from './storage/storage.service';
 import {AuthGuard} from './router/router.guard';
 
 import { DungeonCounterComponent } from './dungeon-counter/dungeon-counter.component';
+import { ConfirmButtonComponent } from './common/confirm-button/confirm-button.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { DungeonCounterComponent } from './dungeon-counter/dungeon-counter.compo
     MonstersComponent,
     SheetsComponent,
     LoginComponent,
-    DungeonCounterComponent
+    DungeonCounterComponent,
+    ConfirmButtonComponent
   ],
   imports: [
     BrowserModule,

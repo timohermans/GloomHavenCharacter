@@ -1,26 +1,37 @@
 <div class="container">
-  <h2>Dungeon tracker</h2>
+  <div class="custom-grid divide-evenly">
+    <div>&nbsp;</div>
+    <div><h5 class="title">Tracker</h5></div>
+    <app-confirm-button
+      iconClass="fas fa-eraser fa-lg"
+      confirmationText="Are you sure you want to reset the counter?"
+      (confirm)="reset()" >
+    </app-confirm-button>
+  </div>
   <form [formGroup]="form">
-    <div class="form-group">
+    <div class="counter-card">
+      <div class="form-group">
         <app-custom-counter labelText="HP" id="divHp" formControlName="hp"></app-custom-counter>
-    </div>
+      </div>
 
-    <div class="form-group">
+      <div class="form-group">
         <app-custom-counter labelText="XP" id="divXp" formControlName="xp"></app-custom-counter>
+      </div>
+
+      <div class="form-group">
+        <app-custom-counter labelText="Tokens" id="divTokens" formControlName="tokens"></app-custom-counter>
+      </div>
+
+      <div class="form-group">
+        <app-custom-counter labelText="Kills" id="divKills" formControlName="kills"></app-custom-counter>
+      </div>
     </div>
 
-    <div class="form-group">
-        <app-custom-counter labelText="tokens" id="divTokens" formControlName="tokens"></app-custom-counter>
+    <div class="action-float">
+      <button class="btn btn-lg btn-primary btn-float" (click)="reset()">
+        <span class="fas fa-save"></span>
+      </button>
     </div>
-
-    <div class="form-group">
-        <app-custom-counter labelText="kills" id="divKills" formControlName="kills"></app-custom-counter>
-    </div>
-
-    <div class="">
-      <button class="btn btn-default" (click)="reset()">Reset</button>
-    </div>
-
 
   </form>
 </div>

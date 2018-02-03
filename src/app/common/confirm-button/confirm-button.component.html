@@ -2,7 +2,7 @@
   <span [class]="iconClass"></span>
 </div>
 
-<div class="confirmation" *ngIf="isConfirmationDialogVisible">
+<div class="confirmation" *ngIf="isConfirmationDialogVisible" @dialogPopup>
   <div class="overlay" (click)="closeConfirmationDialog()">
   </div>
   <div class="dialog custom-card">

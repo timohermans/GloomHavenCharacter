@@ -1,11 +1,13 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { animations } from './confirm-button.animations';
 
 import * as _ from 'lodash';
 
 @Component({
   selector: 'app-confirm-button',
   templateUrl: './confirm-button.component.html',
-  styleUrls: ['./confirm-button.component.scss']
+  styleUrls: ['./confirm-button.component.scss'],
+  animations: animations
 })
 export class ConfirmButtonComponent implements OnInit {
   @Output() confirm: EventEmitter<void> = new EventEmitter<void>();

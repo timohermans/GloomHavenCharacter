@@ -2,4 +2,13 @@
   text-align: center;
 }
 
+.counter-container {
+  display: flex;
+  padding: 16px 14px;
+  justify-content: space-between;
+
+  h6 {
+    margin: 0px;
+  }
+}
 

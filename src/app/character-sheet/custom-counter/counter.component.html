@@ -1,22 +1,9 @@
-<div class="form-group">
-  <!-- <div class="counter-label">
-    {{counter}} {{labelText}}
-  </div> -->
-  <div class="row">
-    <div class="col">
-      <button class="btn btn-outline-primary value-m-5" (click)="setAmount(-5)">-5</button>
-    </div>
-    <div class="col">
-      <button class="btn btn-outline-primary value-m-1" (click)="setAmount(-1)">-1</button>
-    </div>
-    <div class="col-2" style="text-align: center">
-      <h6>{{counter}} {{labelText}}</h6>
-    </div>
-    <div class="col">
-      <button class="btn btn-outline-primary value-1" (click)="setAmount(1)">+1</button>
-    </div>
-    <div class="col">
-      <button class="btn btn-outline-primary value-5" (click)="setAmount(5)">+5</button>
-    </div>
+<div class="counter-container">
+  <div><button class="btn btn-outline-primary value-m-5" (click)="setAmount(-5)">-5</button></div>
+  <div><button class="btn btn-outline-primary value-m-1" (click)="setAmount(-1)">-1</button></div>
+  <div class="counter-label">
+    <h6>{{labelText}}<br/>{{counter}}</h6>
   </div>
+  <div><button class="btn btn-outline-primary value-1" (click)="setAmount(1)">+1</button></div>
+  <div><button class="btn btn-outline-primary value-5" (click)="setAmount(5)">+5</button></div>
 </div>

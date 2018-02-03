@@ -8,7 +8,7 @@
   width: 70%;
   height: 100%;
   box-shadow: 1px 0px 5px grey;
-  z-index: 2030;
+  z-index: $menuZIndex;
 }
 
 #sidebarOverlay {
@@ -16,15 +16,15 @@
   top: 0;
   height: 100%;
   width: 100%;
-  background-color: black;
-  z-index: 2029;
-  opacity: 0.5;
+  background-color: $overlayColor;
+  opacity: $overlayOpacity;
+  z-index: $menuOverlayZIndex;
 }
 
 #navbar {
   background-color: $white;
   position: relative;
-  height: 56px;
+  height: $navHeight;
 
   .logo {
     left: 50%;

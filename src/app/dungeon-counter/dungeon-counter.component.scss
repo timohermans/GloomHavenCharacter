@@ -1,8 +1,6 @@
+@import '../../scss/variables.scss';
 .container {
     padding: 0 8px;
-    // .title {
-    //     text-align: center;
-    // }
     .form-group {
         margin-bottom: 15px;
         border-bottom: 1px solid #ededed;
@@ -16,15 +14,13 @@
         word-wrap: break-word;
         box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
     }
-
     .action-float {
-      position:fixed;
-      bottom:66px;
-      right: 30px;
-
-      .btn-float {
-        border-radius: 50%;
-        box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
-      }
+        position: fixed;
+        bottom: $floatingButtonBottom;
+        right: 30px;
+        .btn-float {
+            border-radius: 50%;
+            box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+        }
     }
 }

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {FormGroup, FormBuilder} from '@angular/forms';
+import { DungeonStorageKey } from './dungeon-counter.constants';
 import * as _ from 'lodash';
 
 @Component({
@@ -8,18 +9,16 @@ import * as _ from 'lodash';
   styleUrls: ['./dungeon-counter.component.scss']
 })
 export class DungeonCounterComponent implements OnInit {
-  readonly dungeonStorageKey = 'DUNGEON_COUNTER_DATA';
-
   form: FormGroup;
 
   private defaultFormValues = {
-      hp: 0,
-      xp: 0,
-      tokens: 0,
-      kills: 0
+    hp: 0,
+    xp: 0,
+    tokens: 0,
+    kills: 0
   };
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit() {
     this.initForm();
@@ -32,12 +31,12 @@ export class DungeonCounterComponent implements OnInit {
   }
 
   private loadData() {
-    const dungeonDataJson = sessionStorage.getItem(this.dungeonStorageKey);
+    const dungeonDataJson = sessionStorage.getItem(DungeonStorageKey);
 
     if (dungeonDataJson) {
       const dungeonData = _.merge(_.clone(this.defaultFormValues), JSON.parse(dungeonDataJson));
 
-      this.form.setValue(dungeonData, { emitEvent: false });
+      this.form.setValue(dungeonData, {emitEvent: false});
     }
   }
 
@@ -45,13 +44,12 @@ export class DungeonCounterComponent implements OnInit {
     this.form.valueChanges
       .debounceTime(500)
       .subscribe((dungeonData) => {
-        sessionStorage.setItem(this.dungeonStorageKey, JSON.stringify(dungeonData));
+        sessionStorage.setItem(DungeonStorageKey, JSON.stringify(dungeonData));
       });
   }
 
   reset() {
     this.form.reset(this.defaultFormValues);
-    sessionStorage.removeItem(this.dungeonStorageKey);
+    sessionStorage.removeItem(DungeonStorageKey);
   }
-
 }

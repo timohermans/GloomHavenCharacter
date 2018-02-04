@@ -1,5 +1,9 @@
 @import '../scss/variables.scss';
 
+#main {
+  padding-top:15px;
+}
+
 #sidebar {
   position: fixed;
   background-color: $white;

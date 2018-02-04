@@ -1,26 +1,29 @@
 .custom-grid {
-  display: flex;
-
-  &.divide-evenly {
-    justify-content: space-between;
-  }
-
-  &.items-start-at-end {
-    justify-content: flex-end;
-  }
-
-  .center-item {
-    align-self: center;
-  }
+    display: flex;
+    &.divide-evenly {
+        justify-content: space-between;
+    }
+    &.items-start-at-end {
+        justify-content: flex-end;
+    }
+    .center-item {
+        align-self: center;
+    }
 }
 
 .custom-card {
-  background-color: #fff;
-  border-radius: 8px;
-  margin-bottom: 10px;
-  font-size: 14px;
-  line-height: 20px;
-  word-wrap: break-word;
-  box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
-  padding: 16px 14px;
+    background-color: #fff;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    line-height: 20px;
+    word-wrap: break-word;
+    box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+    padding: 16px 14px;
+}
+
+.with-border {
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #ededed;
 }

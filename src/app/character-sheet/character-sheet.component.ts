@@ -165,6 +165,8 @@ export class CharacterSheetComponent implements OnInit {
 
   hasCurrentLevelWith(xp: number, levelIndex: number) {
     const level = levelIndex + 1;
+
+    // TODO: use the character sheet service
     let levelReached = 0;
 
     _.each(this.xpPerLevel, (xpRequired: number, index: number) => {

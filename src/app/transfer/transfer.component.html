@@ -1,0 +1,99 @@
+<div class="container">
+
+  <div class="custom-card">
+    <h6 class="title">
+      Scenario level
+    </h6>
+    <div class="custom-grid divide-evenly with-border">
+      <div *ngFor="let level of levels">
+        <button class="btn btn-outline-primary" [ngClass]="{ 'active': level === selectedLevel }" (click)="selectedLevel = level">{{level}}</button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-8">
+        Gold modifier
+      </div>
+      <div class="col-4">
+        x{{goldModifier}}
+      </div>
+    </div>
+  </div>
+
+  <div class="custom-card">
+    <h6 class="title">
+      Stats
+    </h6>
+
+    <div class="with-border">
+      <select name="character" id="selCharacter" class="form-control" [(ngModel)]="selectedSheet">
+        <option *ngFor="let sheet of (sheets | async)" [ngValue]="sheet">
+          {{sheet.name || 'unnamed'}} - {{sheet.title}}
+        </option>
+      </select>
+    </div>
+
+    <ng-container *ngIf="selectedSheet">
+      <div class="row with-border">
+        <div class="col-3">
+          Level
+        </div>
+        <div class="col-2">
+          {{beforeTransferSheetLevel}}
+        </div>
+        <div class="col-2">
+          <span class="fas fa-long-arrow-alt-right"></span>
+        </div>
+        <div class="col-4">
+          <span [ngClass]="{ 'total': isLevelUp }">{{afterTransferSheetLevel}}</span>
+          <span class="calculation" *ngIf="isLevelUp">
+            (Level up!)
+          </span>
+        </div>
+      </div>
+
+
+      <div class="row with-border">
+        <div class="col-3">
+          XP
+        </div>
+        <div class="col-2">
+          {{selectedSheet.experiencePoints}}
+        </div>
+        <div class="col-2">
+          <span class="fas fa-long-arrow-alt-right"></span>
+        </div>
+        <div class="col-4">
+          <span [ngClass]="{ 'total': counterData.xp > 0 }">{{totalExperiencePoints}}</span>
+          <span class="calculation">
+            (+{{counterData.xp}})
+          </span>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-3">
+          Gold
+        </div>
+        <div class="col-2">
+          {{selectedSheet.gold}}
+        </div>
+        <div class="col-2">
+          <span class="fas fa-long-arrow-alt-right"></span>
+        </div>
+        <div class="col-4">
+          <span [ngClass]="{ 'total': goldFromTokens > 0 }">{{totalGold}}</span>
+          <span class="calculation">
+            ({{counterData.tokens}} x {{goldModifier}} = +{{goldFromTokens}})
+          </span>
+        </div>
+      </div>
+
+      <div class="action-float" *ngIf="isDataSaveable">
+        <a class="btn btn-lg btn-primary btn-float" (click)="updateSheet()">
+          <span class="fas fa-check"></span>
+        </a>
+      </div>
+    </ng-container>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+@import '../../../scss/variables.scss';
+.confirmation {
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: $overlayColor;
+        opacity: $overlayOpacity;
+        z-index: $dialogOverlayZIndex;
+    }
+    .dialog {
+        position: fixed;
+        top: 30%;
+        left: 50%;
+        width: $dialog-width;
+        margin-left: ($dialog-width / 2) * -1;
+        z-index: $dialogZIndex;
+        .buttons>div {
+            padding-left: 15px;
+        }
+    }
+}

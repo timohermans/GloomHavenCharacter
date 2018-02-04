@@ -1,0 +1,24 @@
+@import '../../scss/variables.scss';
+.title {
+    text-align: center;
+}
+
+.total {
+    color: green;
+    font-weight: bold;
+}
+
+.calculation {
+    font-size: 75%;
+}
+
+.action-float {
+    position: fixed;
+    bottom: $floatingButtonBottom;
+    right: 30px;
+    .btn-float {
+        color: white;
+        border-radius: 50%;
+        box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+    }
+}

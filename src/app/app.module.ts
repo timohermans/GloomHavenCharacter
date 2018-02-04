@@ -2,7 +2,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NgModule, APP_INITIALIZER} from '@angular/core';
 import {RouterModule} from '@angular/router';
-import {ReactiveFormsModule} from '@angular/forms';
+import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 
 import {AppComponent} from './app.component';
 import {CharacterSheetComponent} from './character-sheet/character-sheet.component';
@@ -19,7 +19,10 @@ import {AngularFirestoreModule} from 'angularfire2/firestore';
 import {StorageService} from './storage/storage.service';
 import {AuthGuard} from './router/router.guard';
 
-import { DungeonCounterComponent } from './dungeon-counter/dungeon-counter.component';
+import {DungeonCounterComponent} from './dungeon-counter/dungeon-counter.component';
+import {ConfirmButtonComponent} from './common/confirm-button/confirm-button.component';
+import {TransferComponent} from './transfer/transfer.component';
+import {CharacterSheetService} from './character-sheet/character-sheet.service';
 
 @NgModule({
   declarations: [
@@ -29,12 +32,15 @@ import { DungeonCounterComponent } from './dungeon-counter/dungeon-counter.compo
     MonstersComponent,
     SheetsComponent,
     LoginComponent,
-    DungeonCounterComponent
+    DungeonCounterComponent,
+    ConfirmButtonComponent,
+    TransferComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(AppRoutes),
+    FormsModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(StorageService.config),
     AngularFirestoreModule,
@@ -42,6 +48,7 @@ import { DungeonCounterComponent } from './dungeon-counter/dungeon-counter.compo
   ],
   providers: [
     StorageService,
+    CharacterSheetService,
     AuthGuard,
   ],
   bootstrap: [AppComponent]

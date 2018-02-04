@@ -1,4 +1,26 @@
-.form-group {
-    margin-bottom: 15px;
-    border-bottom: 1px solid #ededed;
+@import '../../scss/variables.scss';
+.container {
+    padding: 0 8px;
+    .form-group {
+        margin-bottom: 15px;
+        border-bottom: 1px solid #ededed;
+    }
+    .counter-card {
+        background-color: #fff;
+        border-radius: 8px;
+        margin-bottom: 10px;
+        font-size: 14px;
+        line-height: 20px;
+        word-wrap: break-word;
+        box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+    }
+    .action-float {
+        position: fixed;
+        bottom: $floatingButtonBottom;
+        right: 30px;
+        .btn-float {
+            border-radius: 50%;
+            box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+        }
+    }
 }

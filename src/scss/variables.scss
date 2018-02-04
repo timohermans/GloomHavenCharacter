@@ -1,4 +1,27 @@
 $primary:       rgb(150, 67, 0);
 
+//LAYOUT
+$defaultPadding:      15px;
+
+//OVERLAY
+$overlayColor:  black;
+$overlayOpacity:  0.4;
+
+//Z-INDEX
+$menuOverlayZIndex:   2029;
+$menuZIndex:          2030;
+$dialogOverlayZIndex: 3029;
+$dialogZIndex:        3030;
+
+//DIALOG
+$dialog-width: 280px;
+
+//NAV
+$navHeight:           56px;
+
+//BUTTON
+$floatingButtonBottom:  $navHeight + $defaultPadding;
+
+
 @import '../../node_modules/bootstrap/scss/_functions.scss';
 @import '../../node_modules/bootstrap/scss/_variables.scss';

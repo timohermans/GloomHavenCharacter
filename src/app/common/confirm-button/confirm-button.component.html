@@ -1,0 +1,28 @@
+<div *ngIf="isIconButton" (click)="showConfirmationDialog()">
+  <span [class]="iconClass"></span>
+</div>
+
+<div class="confirmation" *ngIf="isConfirmationDialogVisible" @dialogPopup>
+  <div class="overlay" (click)="closeConfirmationDialog()">
+  </div>
+  <div class="dialog custom-card">
+    <h5>
+      Confirm
+    </h5>
+    <div>
+      {{confirmationText}}
+    </div>
+    <div class="custom-grid buttons items-start-at-end">
+      <div>
+        <button class="btn btn-success" (click)="yesButtonClicked()">
+          Yes
+        </button>
+      </div>
+      <div>
+        <button class="btn btn-danger" (click)="closeConfirmationDialog()">
+          No
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

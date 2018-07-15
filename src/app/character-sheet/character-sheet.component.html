@@ -6,7 +6,7 @@
 
 <div [@flyInOut]="currentTabName">
   <div class="container">
-    <h2>{{form.controls.title.value}}</h2>
+    <h2 data-test-id="sheetTitle">{{form.controls.title.value}}</h2>
     <form [formGroup]="form">
       <div *ngIf="isCurrent('general')">
         <div class="form-group">
@@ -17,7 +17,7 @@
           <div class="row">
             <div *ngFor="let xp of xpPerLevel; let levelIndex = index" class="level col" [ngClass]="{'current-level': hasCurrentLevelWith(form.controls.experiencePoints.value, levelIndex)}"
               [@levelUp]="hasCurrentLevelWith(form.controls.experiencePoints.value, levelIndex) ? 'current-level' : 'level'">
-              <div>
+              <div data-test-id="level">
                 {{levelIndex + 1}}
               </div>
               <div class="xp-indicator">

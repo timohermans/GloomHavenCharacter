@@ -1,16 +1,14 @@
-import {Component, OnInit, OnChanges, Input} from '@angular/core';
-import {FormGroup, FormBuilder, Validators, FormArray} from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
-import {distinctUntilKeyChanged, flatMap, debounceTime, filter} from 'rxjs/operators';
+import {flatMap, debounceTime, filter} from 'rxjs/operators';
 import * as _ from 'lodash';
 
 import {CharacterSheet} from './character-sheet.class';
-import {Perk} from './perk.class';
 
 import {animations} from './character-sheet.animations';
-import {CharacterSheetFactory, Character} from './character-sheet-template.factory';
 import {AngularFirestoreDocument, AngularFirestore} from 'angularfire2/firestore';
-import {Observable, Subscription} from 'rxjs';
+import {Subscription} from 'rxjs';
 
 
 
@@ -69,7 +67,7 @@ export class CharacterSheetComponent implements OnInit {
 
   private buildSheetForm() {
     this.form = this.formBuilder.group({
-      title: '',
+      title: 'sheet',
       name: ['', Validators.required],
       experiencePoints: [0, Validators.required],
       experiencePointsNotes: [''],
@@ -87,14 +85,6 @@ export class CharacterSheetComponent implements OnInit {
     this.xpPerLevel = [0, 45, 95, 150, 210, 275, 345, 420, 500];
   }
 
-  private addPerks() {
-    this.form.setControl('perks', this.formBuilder.array([
-      this.formBuilder.group({
-        description: 'Remove two \'-1\' cards',
-        hasObtained: false
-      })
-    ]));
-  }
 
   private countAmountOfPerksUnlocked() {
     this.amountOfPerksUnlocked = 0;
@@ -121,14 +111,12 @@ export class CharacterSheetComponent implements OnInit {
       });
 
     this.perkFormChangeSubscription = this.form.controls.perks.valueChanges
-      .subscribe((data) => {
+      .subscribe(() => {
         if (_.some(this.form.controls.challengeSuccesses.value, c => c === false)) {
           return;
         }
-
         const oldAmountOfPerksUnlocked = _.clone(this.amountOfPerksUnlocked);
         this.countAmountOfPerksUnlocked();
-
         if (oldAmountOfPerksUnlocked < this.amountOfPerksUnlocked) {
           this.form.controls.challengeSuccesses.setValue([false, false, false]);
         }
@@ -172,7 +160,7 @@ export class CharacterSheetComponent implements OnInit {
     // TODO: use the character sheet service
     let levelReached = 0;
 
-    _.each(this.xpPerLevel, (xpRequired: number, index: number) => {
+    _.each(this.xpPerLevel, (xpRequired: number) => {
       if (xp >= xpRequired) {
         levelReached += 1;
       }

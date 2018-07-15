@@ -16,6 +16,7 @@ describe('ConfirmButtonComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ConfirmButtonComponent);
     component = fixture.componentInstance;
+    component.isIconButton = false;
     fixture.detectChanges();
   });
 

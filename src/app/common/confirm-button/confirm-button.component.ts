@@ -21,7 +21,7 @@ export class ConfirmButtonComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    if (_.isEmpty(this.iconClass)) {
+    if (_.isEmpty(this.iconClass) && this.isIconButton) {
       throw new Error(`iconClass string is needed when 'isIconButton' true`);
     }
   }

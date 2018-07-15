@@ -23,6 +23,7 @@ import {ConfirmButtonComponent} from './common/confirm-button/confirm-button.com
 import {TransferComponent} from './transfer/transfer.component';
 import {CharacterSheetService} from './character-sheet/character-sheet.service';
 import {HistoryComponent} from './character-sheet/history/history.component';
+import { HistoryService } from './character-sheet/history/history.service';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import {HistoryComponent} from './character-sheet/history/history.component';
   providers: [
     StorageService,
     CharacterSheetService,
+    HistoryService,
     AuthGuard,
   ],
   bootstrap: [AppComponent]

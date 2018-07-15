@@ -1,4 +1,4 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {async, ComponentFixture, TestBed, fakeAsync, tick} from '@angular/core/testing';
 import {By} from '@angular/platform-browser';
 
 import {CharacterSheetComponent} from './character-sheet.component';
@@ -13,13 +13,16 @@ import {AngularFirestore} from 'angularfire2/firestore';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {Page} from './character-sheet.component.spec.page';
 import {HistoryMockComponent} from './history/history.component.mock';
+import { HistoryService } from './history/history.service';
 
 describe('CharacterSheetComponent', () => {
   const routeParams = {paramMap: of({id: '123'})};
 
   let angularFirestoreSpy: jasmine.SpyObj<AngularFirestore>;
+  let historyService: jasmine.SpyObj<HistoryService>;
   const setupSpies = () => {
     angularFirestoreSpy = jasmine.createSpyObj('AngularFirestore', ['doc']);
+    historyService = jasmine.createSpyObj('HistoryService', ['addStatChange']);
   };
   let component: CharacterSheetComponent;
   let fixture: ComponentFixture<CharacterSheetComponent>;
@@ -42,7 +45,8 @@ describe('CharacterSheetComponent', () => {
       ],
       providers: [
         {provide: ActivatedRoute, useValue: routeParams},
-        {provide: AngularFirestore, useValue: angularFirestoreSpy}
+        {provide: AngularFirestore, useValue: angularFirestoreSpy},
+        {provide: HistoryService, useValue: historyService}
       ]
     })
       .compileComponents();
@@ -128,6 +132,16 @@ describe('CharacterSheetComponent', () => {
 
     expect(page.logComponent).toBeTruthy();
   });
+
+  it('adds a stat change when something changes', fakeAsync(() => {
+      page.xpPlusFive.click();
+      page.xpPlusFive.click();
+
+      tick(500);
+      fixture.detectChanges();
+
+      expect(historyService.addStatChange).toHaveBeenCalledWith('xp', 0, 10);
+  }));
 
   function fillIn(cssQuery, valueToFill) {
     const inputElement = fixture.debugElement.query(By.css(cssQuery)).nativeElement as HTMLInputElement;

@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {AngularFirestoreCollection, AngularFirestore} from 'angularfire2/firestore';
 import {CharacterSheet} from './character-sheet.class';
-import {Observable} from 'rxjs/Observable';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {Observable, BehaviorSubject} from 'rxjs';
 import {StorageService} from '../storage/storage.service';
+import {map} from 'rxjs/operators';
 
 import * as _ from 'lodash';
 
@@ -27,13 +27,15 @@ export class CharacterSheetService {
   private watchExternalDbChanges() {
     this.sheetsCollection
       .snapshotChanges()
-      .map(values => {
-        return values.map(value => {
-          const data = value.payload.doc.data() as CharacterSheet;
-          data.id = value.payload.doc.id;
-          return data;
-        });
-      })
+      .pipe(
+        map(values => {
+          return values.map(value => {
+            const data = value.payload.doc.data() as CharacterSheet;
+            data.id = value.payload.doc.id;
+            return data;
+          });
+        })
+      )
       .subscribe((characters: CharacterSheet[]) => {
         if (this.sheetsStore.observers.length > 0) {
           console.log(`going to notify ${this.sheetsStore.observers.length} observers about sheet changes`);

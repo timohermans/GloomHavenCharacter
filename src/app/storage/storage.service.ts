@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 
 interface User {
   displayName: string;

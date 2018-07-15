@@ -3,7 +3,7 @@ import {AngularFirestore, AngularFirestoreCollection} from 'angularfire2/firesto
 import * as _ from 'lodash';
 
 import {CharacterSheetFactory, Character} from '../character-sheet/character-sheet-template.factory';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {CharacterSheet} from '../character-sheet/character-sheet.class';
 import {StorageService} from '../storage/storage.service';
 import {CharacterSheetService} from '../character-sheet/character-sheet.service';

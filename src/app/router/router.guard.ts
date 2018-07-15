@@ -1,10 +1,11 @@
 import {Injectable} from '@angular/core';
 import {CanActivate, Router} from '@angular/router';
 import {AngularFireAuth} from 'angularfire2/auth';
+import {map} from 'rxjs/operators';
 
 import * as _ from 'lodash';
 import {StorageService} from '../storage/storage.service';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -13,13 +14,15 @@ export class AuthGuard implements CanActivate {
 
   canActivate(): Observable<boolean> {
     return this.storageService.watchAuthChanges()
-      .map(user => {
-        if (this.storageService.isLoggedIn()) {
-          return true;
-        }
+      .pipe(
+        map(user => {
+          if (this.storageService.isLoggedIn()) {
+            return true;
+          }
 
-        this.router.navigateByUrl('/login');
-        return false;
-      });
+          this.router.navigateByUrl('/login');
+          return false;
+        })
+      );
   }
 }

@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormGroup, FormBuilder} from '@angular/forms';
-import { DungeonStorageKey } from './dungeon-counter.constants';
+import {DungeonStorageKey} from './dungeon-counter.constants';
 import * as _ from 'lodash';
+import {debounceTime} from 'rxjs/operators';
 
 @Component({
   selector: 'app-dungeon-counter',
@@ -42,7 +43,9 @@ export class DungeonCounterComponent implements OnInit {
 
   private setupValueChanges() {
     this.form.valueChanges
-      .debounceTime(500)
+      .pipe(
+        debounceTime(500)
+      )
       .subscribe((dungeonData) => {
         sessionStorage.setItem(DungeonStorageKey, JSON.stringify(dungeonData));
       });

@@ -1,19 +1,18 @@
-import { Component, OnInit, OnChanges, Input } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { distinctUntilKeyChanged } from 'rxjs/operators/distinctUntilKeyChanged';
+import {Component, OnInit, OnChanges, Input} from '@angular/core';
+import {FormGroup, FormBuilder, Validators, FormArray} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
+import {distinctUntilKeyChanged, flatMap, debounceTime, filter} from 'rxjs/operators';
 import * as _ from 'lodash';
 
-import { CharacterSheet } from './character-sheet.class';
-import { Perk } from './perk.class';
+import {CharacterSheet} from './character-sheet.class';
+import {Perk} from './perk.class';
 
-import { animations } from './character-sheet.animations';
-import { CharacterSheetFactory, Character } from './character-sheet-template.factory';
-import { AngularFirestoreDocument, AngularFirestore } from 'angularfire2/firestore';
-import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs/Subscription';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/mergeMap';
+import {animations} from './character-sheet.animations';
+import {CharacterSheetFactory, Character} from './character-sheet-template.factory';
+import {AngularFirestoreDocument, AngularFirestore} from 'angularfire2/firestore';
+import {Observable, Subscription} from 'rxjs';
+
+
 
 @Component({
   selector: 'app-character-sheet',
@@ -40,7 +39,7 @@ export class CharacterSheetComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private db: AngularFirestore) { }
+    private db: AngularFirestore) {}
 
   ngOnInit() {
     this.buildSheetForm();
@@ -51,14 +50,16 @@ export class CharacterSheetComponent implements OnInit {
   }
 
   private loadDataFromParam() {
-    this.route.paramMap.flatMap(params => {
-      const docId = params.get('id');
-      this.characterSheetDoc = this.db.doc<CharacterSheet>(`sheets/${docId}`);
-      return this.characterSheetDoc.valueChanges();
-    })
+    this.route.paramMap.pipe(
+      flatMap(params => {
+        const docId = params.get('id');
+        this.characterSheetDoc = this.db.doc<CharacterSheet>(`sheets/${docId}`);
+        return this.characterSheetDoc.valueChanges();
+      })
+    )
       .subscribe(sheet => {
         if (!this.isSheetChangedFromInsideApplication) {
-          this.characterSheet = sheet;
+          this.characterSheet = sheet as CharacterSheet;
           this.loadDataIntoForm();
         } else {
           this.isSheetChangedFromInsideApplication = false;
@@ -101,17 +102,19 @@ export class CharacterSheetComponent implements OnInit {
 
     _.each(perks, (perk) => {
       if (perk.hasObtained) {
-       this.amountOfPerksUnlocked += 1;
+        this.amountOfPerksUnlocked += 1;
       }
     });
   }
 
   private setupFormValueChanges() {
     this.entireFormChangeSubscription = this.form.valueChanges
-      .debounceTime(500)
-      .filter(data => {
-        return !_.isEqual(data, this.characterSheet);
-      })
+      .pipe(
+        debounceTime(500),
+        filter(data => {
+          return !_.isEqual(data, this.characterSheet);
+        })
+      )
       .subscribe((data) => {
         this.isSheetChangedFromInsideApplication = true;
         this.characterSheetDoc.update(data);

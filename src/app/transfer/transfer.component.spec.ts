@@ -1,12 +1,12 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 import {TransferComponent} from './transfer.component';
-import {ReactiveFormsModule, FormsModule} from '../../../node_modules/@angular/forms';
+import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import {StorageService} from '../storage/storage.service';
 import {CharacterSheetService} from '../character-sheet/character-sheet.service';
-import {AngularFirestore} from '../../../node_modules/angularfire2/firestore';
+import {AngularFirestore} from 'angularfire2/firestore';
 import {of} from 'rxjs';
-import {routerNgProbeToken} from '../../../node_modules/@angular/router/src/router_module';
+import {routerNgProbeToken} from '@angular/router/src/router_module';
 
 describe('TransferComponent', () => {
   let component: TransferComponent;

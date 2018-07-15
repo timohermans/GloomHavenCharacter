@@ -9,7 +9,6 @@ import {CharacterSheetComponent} from './character-sheet/character-sheet.compone
 
 import {AppRoutes} from './app.router';
 import {CustomCounterComponent} from './character-sheet/custom-counter/counter.component';
-import {MonstersComponent} from './monsters/monsters.component';
 import {SheetsComponent} from './sheets/sheets.component';
 import {LoginComponent} from './login/login.component';
 import {AngularFireModule} from 'angularfire2';
@@ -23,14 +22,15 @@ import {DungeonCounterComponent} from './dungeon-counter/dungeon-counter.compone
 import {ConfirmButtonComponent} from './common/confirm-button/confirm-button.component';
 import {TransferComponent} from './transfer/transfer.component';
 import {CharacterSheetService} from './character-sheet/character-sheet.service';
+import {HistoryComponent} from './character-sheet/history/history.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CharacterSheetComponent,
     CustomCounterComponent,
-    MonstersComponent,
     SheetsComponent,
+    HistoryComponent,
     LoginComponent,
     DungeonCounterComponent,
     ConfirmButtonComponent,

@@ -12,6 +12,7 @@ import {of} from 'rxjs';
 import {AngularFirestore} from 'angularfire2/firestore';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {Page} from './character-sheet.component.spec.page';
+import {HistoryMockComponent} from './history/history.component.mock';
 
 describe('CharacterSheetComponent', () => {
   const routeParams = {paramMap: of({id: '123'})};
@@ -34,7 +35,11 @@ describe('CharacterSheetComponent', () => {
         ReactiveFormsModule,
         FormsModule
       ],
-      declarations: [CharacterSheetComponent, CustomCounterComponent],
+      declarations: [
+        CharacterSheetComponent,
+        HistoryMockComponent,
+        CustomCounterComponent
+      ],
       providers: [
         {provide: ActivatedRoute, useValue: routeParams},
         {provide: AngularFirestore, useValue: angularFirestoreSpy}
@@ -105,7 +110,7 @@ describe('CharacterSheetComponent', () => {
   });
 
   it('should show the appropriate level when gaining experience', () => {
-    page.hasText('1', page.currentLevelLabel);
+    expect(_.trim(page.currentLevelLabel.innerHTML, '\r\n ')).toBe('1');
 
     for (let i = 0; i < 9; i += 1) {
       page.xpPlusFive.click();
@@ -113,7 +118,15 @@ describe('CharacterSheetComponent', () => {
 
     fixture.detectChanges();
 
-    page.hasText('2', page.currentLevelLabel);
+    expect(_.trim(page.currentLevelLabel.innerHTML, '\r\n ')).toBe('2');
+  });
+
+  it('can switch to the log tab', () => {
+    page.logTab.click();
+
+    fixture.detectChanges();
+
+    expect(page.logComponent).toBeTruthy();
   });
 
   function fillIn(cssQuery, valueToFill) {

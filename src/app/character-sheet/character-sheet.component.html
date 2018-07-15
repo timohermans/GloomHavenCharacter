@@ -2,6 +2,7 @@
   <!-- <nav class="navbar navbar-light"> -->
   <a class="nav-link" [ngClass]="{ 'active': isCurrent('general') }" (click)="currentTabName = 'general'">General</a>
   <a class="nav-link" [ngClass]="{ 'active': isCurrent('perks') }" (click)="currentTabName = 'perks'">Perks</a>
+  <a class="nav-link" [ngClass]="{ 'active': isCurrent('log') }" (click)="currentTabName = 'log'" data-e2e-id="logTab">History</a>
 </nav>
 
 <div [@flyInOut]="currentTabName">
@@ -67,6 +68,10 @@
             <input type="checkbox" [formControl]="challengeSuccess">
           </div>
         </div>
+      </div>
+
+      <div *ngIf="isCurrent('log')">
+        <app-history data-e2e-id="log"></app-history>
       </div>
     </form>
   </div>

@@ -11,6 +11,14 @@ export class Page extends BasePage<CharacterSheetComponent> {
         return this.query('#levels .current-level [data-test-id="level"]');
     }
 
+    get logTab(): HTMLElement {
+        return this.query('[data-e2e-id="logTab"]');
+    }
+
+    get logComponent(): HTMLElement {
+        return this.query('[data-e2e-id="log"]');
+    }
+
     constructor(
         fixture: ComponentFixture<CharacterSheetComponent>
     ) {

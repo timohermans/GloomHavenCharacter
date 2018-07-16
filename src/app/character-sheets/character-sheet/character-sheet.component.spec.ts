@@ -4,7 +4,7 @@ import {By} from '@angular/platform-browser';
 import {CharacterSheetComponent} from './character-sheet.component';
 import {DebugElement} from '@angular/core';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
-import {CustomCounterComponent} from './custom-counter/counter.component';
+import {CustomCounterComponent} from '../../shared/custom-counter/counter.component';
 
 import * as _ from 'lodash';
 import {ActivatedRoute} from '@angular/router';
@@ -12,8 +12,8 @@ import {of} from 'rxjs';
 import {AngularFirestore} from 'angularfire2/firestore';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {Page} from './character-sheet.component.spec.page';
-import {HistoryMockComponent} from './history/history.component.mock';
-import { HistoryService } from './shared/history.service';
+import {HistoryMockComponent} from '../history/history.component.mock';
+import { HistoryService } from '../shared/history.service';
 
 describe('CharacterSheetComponent', () => {
   const routeParams = {paramMap: of({id: '123'})};

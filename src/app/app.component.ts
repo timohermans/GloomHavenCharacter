@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 
 import {animations} from './app.animations';
-import {StorageService} from './storage/storage.service';
+import {StorageService} from './shared/storage/storage.service';
 
 @Component({
   selector: 'app-root',

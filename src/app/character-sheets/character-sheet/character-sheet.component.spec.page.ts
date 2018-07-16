@@ -1,6 +1,6 @@
 import {ComponentFixture} from '@angular/core/testing';
 import {CharacterSheetComponent} from './character-sheet.component';
-import {BasePage} from '../base.spec.page';
+import {BasePage} from '../../base.spec.page';
 
 export class Page extends BasePage<CharacterSheetComponent> {
     get xpPlusFive(): HTMLButtonElement {

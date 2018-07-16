@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {AngularFirestoreCollection, AngularFirestore} from 'angularfire2/firestore';
 import {CharacterSheet} from './character-sheet.class';
 import {Observable, BehaviorSubject} from 'rxjs';
-import {StorageService} from '../../storage/storage.service';
+import {StorageService} from '../../shared/storage/storage.service';
 import {map} from 'rxjs/operators';
 
 import * as _ from 'lodash';

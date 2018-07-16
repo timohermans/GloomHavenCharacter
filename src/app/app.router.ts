@@ -1,9 +1,9 @@
-import {CharacterSheetComponent} from './character-sheet/character-sheet.component';
-import {CharacterSheetListComponent} from './character-sheet/character-sheet-list/character-sheet-list.component';
+import {CharacterSheetComponent} from './character-sheets/character-sheet/character-sheet.component';
+import {CharacterSheetListComponent} from './character-sheets/character-sheet-list/character-sheet-list.component';
 import {LoginComponent} from './login/login.component';
-import {AuthGuard} from './router/router.guard';
-import { DungeonCounterComponent } from './dungeon-counter/dungeon-counter.component';
-import {TransferComponent} from './transfer/transfer.component';
+import {AuthGuard} from './shared/router/router.guard';
+import { DungeonCounterComponent } from './dungeon-counters/dungeon-counter/dungeon-counter.component';
+import {TransferComponent} from './dungeon-counters/transfer/transfer.component';
 
 
 const appRoutes = [

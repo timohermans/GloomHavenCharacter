@@ -1,15 +1,16 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
-
-import {CharacterSheetListComponent} from './character-sheet-list.component';
+import {TransferComponent} from './transfer.component';
+import {ReactiveFormsModule, FormsModule} from '@angular/forms';
+import {StorageService} from '../../shared/storage/storage.service';
+import {CharacterSheetService} from '../../character-sheets/shared/character-sheet.service';
 import {AngularFirestore} from 'angularfire2/firestore';
-import {StorageService} from '../../storage/storage.service';
-import {CharacterSheetService} from '../shared/character-sheet.service';
 import {of} from 'rxjs';
 
-describe('PlayersComponent', () => {
+describe('TransferComponent', () => {
+  let component: TransferComponent;
+  let fixture: ComponentFixture<TransferComponent>;
 
-  let storageServiceSpy: jasmine.SpyObj<StorageService>;
   let characterSheetServiceSpy: jasmine.SpyObj<CharacterSheetService>;
   let angularFirestoreSpy: jasmine.SpyObj<AngularFirestore>;
   const setupSpies = () => {
@@ -18,20 +19,16 @@ describe('PlayersComponent', () => {
     characterSheetServiceSpy = jasmine.createSpyObj('CharacterSheetService', ['getSheets']);
     characterSheetServiceSpy.getSheets.and.returnValue(of([]));
   };
-  let component: CharacterSheetListComponent;
-  let fixture: ComponentFixture<CharacterSheetListComponent>;
 
   beforeEach(async(() => {
     setupSpies();
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule.withRoutes(
-        [
-          {path: '', component: CharacterSheetListComponent, pathMatch: 'full'},
-          {path: 'sheets', component: CharacterSheetListComponent},
-          {path: 'sheet/:id', component: CharacterSheetListComponent}
-        ]
-      )],
-      declarations: [CharacterSheetListComponent],
+      imports: [
+        RouterTestingModule,
+        FormsModule,
+        ReactiveFormsModule
+      ],
+      declarations: [TransferComponent],
       providers: [
         {provide: AngularFirestore, useValue: angularFirestoreSpy},
         {provide: CharacterSheetService, useValue: characterSheetServiceSpy},
@@ -42,7 +39,7 @@ describe('PlayersComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CharacterSheetListComponent);
+    fixture = TestBed.createComponent(TransferComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

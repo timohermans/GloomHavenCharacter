@@ -4,7 +4,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, Validators, FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
-import {StorageService} from '../storage/storage.service';
+import {StorageService} from '../shared/storage/storage.service';
 
 interface LoginViewModel {
   username: string;

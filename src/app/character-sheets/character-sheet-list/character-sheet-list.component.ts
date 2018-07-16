@@ -5,7 +5,7 @@ import * as _ from 'lodash';
 import {CharacterSheetFactory, Character} from '../shared/character-sheet-template.factory';
 import {Observable} from 'rxjs';
 import {CharacterSheet} from '../shared/character-sheet.class';
-import {StorageService} from '../../storage/storage.service';
+import {StorageService} from '../../shared/storage/storage.service';
 import {CharacterSheetService} from '../shared/character-sheet.service';
 
 interface CharacterTemplate {

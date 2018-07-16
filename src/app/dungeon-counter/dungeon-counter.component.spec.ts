@@ -2,7 +2,7 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {DungeonCounterComponent} from './dungeon-counter.component';
 import {ConfirmButtonMockComponent} from '../common/confirm-button/confirm-button.component.mock';
-import {ReactiveFormsModule, FormsModule} from '@angular/forms';
+import {ReactiveFormsModule} from '@angular/forms';
 import {CustomCounterComponent} from '../character-sheet/custom-counter/counter.component';
 
 describe('DungeonCounterComponent', () => {

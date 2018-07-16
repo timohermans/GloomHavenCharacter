@@ -13,7 +13,7 @@ import {AngularFirestore} from 'angularfire2/firestore';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {Page} from './character-sheet.component.spec.page';
 import {HistoryMockComponent} from './history/history.component.mock';
-import { HistoryService } from './history/history.service';
+import { HistoryService } from './shared/history.service';
 
 describe('CharacterSheetComponent', () => {
   const routeParams = {paramMap: of({id: '123'})};

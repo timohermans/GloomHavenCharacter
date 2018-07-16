@@ -1,6 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {NgModule, APP_INITIALIZER} from '@angular/core';
+import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 
@@ -9,7 +9,7 @@ import {CharacterSheetComponent} from './character-sheet/character-sheet.compone
 
 import {AppRoutes} from './app.router';
 import {CustomCounterComponent} from './character-sheet/custom-counter/counter.component';
-import {SheetsComponent} from './sheets/sheets.component';
+import {CharacterSheetListComponent} from './character-sheet/character-sheet-list/character-sheet-list.component';
 import {LoginComponent} from './login/login.component';
 import {AngularFireModule} from 'angularfire2';
 import {AngularFireAuthModule} from 'angularfire2/auth';
@@ -21,16 +21,16 @@ import {AuthGuard} from './router/router.guard';
 import {DungeonCounterComponent} from './dungeon-counter/dungeon-counter.component';
 import {ConfirmButtonComponent} from './common/confirm-button/confirm-button.component';
 import {TransferComponent} from './transfer/transfer.component';
-import {CharacterSheetService} from './character-sheet/character-sheet.service';
+import {CharacterSheetService} from './character-sheet/shared/character-sheet.service';
 import {HistoryComponent} from './character-sheet/history/history.component';
-import { HistoryService } from './character-sheet/history/history.service';
+import { HistoryService } from './character-sheet/shared/history.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     CharacterSheetComponent,
     CustomCounterComponent,
-    SheetsComponent,
+    CharacterSheetListComponent,
     HistoryComponent,
     LoginComponent,
     DungeonCounterComponent,

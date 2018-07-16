@@ -1,6 +1,5 @@
-import {Component, OnInit, Input, forwardRef} from '@angular/core';
-import {FormControl, ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
-import {disableDebugTools} from '@angular/platform-browser/src/browser/tools/tools';
+import {Component, Input, forwardRef} from '@angular/core';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 
 @Component({
   selector: 'app-custom-counter',

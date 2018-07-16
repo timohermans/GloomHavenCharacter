@@ -1,5 +1,4 @@
 import {ComponentFixture} from '@angular/core/testing';
-import * as _ from 'lodash';
 
 export class BasePage<T> {
     constructor(

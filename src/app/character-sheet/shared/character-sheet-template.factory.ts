@@ -1,5 +1,4 @@
 import {CharacterSheet} from './character-sheet.class';
-import {Perk} from './perk.class';
 
 export enum Character {
   Brute,

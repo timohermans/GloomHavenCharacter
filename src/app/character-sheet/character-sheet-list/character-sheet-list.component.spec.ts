@@ -1,10 +1,10 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 
-import {SheetsComponent} from './sheets.component';
+import {CharacterSheetListComponent} from './character-sheet-list.component';
 import {AngularFirestore} from 'angularfire2/firestore';
-import {StorageService} from '../storage/storage.service';
-import {CharacterSheetService} from '../character-sheet/character-sheet.service';
+import {StorageService} from '../../storage/storage.service';
+import {CharacterSheetService} from '../shared/character-sheet.service';
 import {of} from 'rxjs';
 
 describe('PlayersComponent', () => {
@@ -18,20 +18,20 @@ describe('PlayersComponent', () => {
     characterSheetServiceSpy = jasmine.createSpyObj('CharacterSheetService', ['getSheets']);
     characterSheetServiceSpy.getSheets.and.returnValue(of([]));
   };
-  let component: SheetsComponent;
-  let fixture: ComponentFixture<SheetsComponent>;
+  let component: CharacterSheetListComponent;
+  let fixture: ComponentFixture<CharacterSheetListComponent>;
 
   beforeEach(async(() => {
     setupSpies();
     TestBed.configureTestingModule({
       imports: [RouterTestingModule.withRoutes(
         [
-          {path: '', component: SheetsComponent, pathMatch: 'full'},
-          {path: 'sheets', component: SheetsComponent},
-          {path: 'sheet/:id', component: SheetsComponent}
+          {path: '', component: CharacterSheetListComponent, pathMatch: 'full'},
+          {path: 'sheets', component: CharacterSheetListComponent},
+          {path: 'sheet/:id', component: CharacterSheetListComponent}
         ]
       )],
-      declarations: [SheetsComponent],
+      declarations: [CharacterSheetListComponent],
       providers: [
         {provide: AngularFirestore, useValue: angularFirestoreSpy},
         {provide: CharacterSheetService, useValue: characterSheetServiceSpy},
@@ -42,7 +42,7 @@ describe('PlayersComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SheetsComponent);
+    fixture = TestBed.createComponent(CharacterSheetListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

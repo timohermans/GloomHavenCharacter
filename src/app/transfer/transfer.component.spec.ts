@@ -3,10 +3,9 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {TransferComponent} from './transfer.component';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import {StorageService} from '../storage/storage.service';
-import {CharacterSheetService} from '../character-sheet/character-sheet.service';
+import {CharacterSheetService} from '../character-sheet/shared/character-sheet.service';
 import {AngularFirestore} from 'angularfire2/firestore';
 import {of} from 'rxjs';
-import {routerNgProbeToken} from '@angular/router/src/router_module';
 
 describe('TransferComponent', () => {
   let component: TransferComponent;

@@ -1,5 +1,3 @@
-import {Item} from './item.class';
-import {PerkUnlock} from './perk-unlock.class';
 import {Perk} from './perk.class';
 
 export interface CharacterSheet {

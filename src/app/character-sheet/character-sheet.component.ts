@@ -4,7 +4,7 @@ import {ActivatedRoute} from '@angular/router';
 import {flatMap, debounceTime, filter} from 'rxjs/operators';
 import * as _ from 'lodash';
 
-import {CharacterSheet} from './character-sheet.class';
+import {CharacterSheet} from './shared/character-sheet.class';
 
 import {animations} from './character-sheet.animations';
 import {AngularFirestoreDocument, AngularFirestore} from 'angularfire2/firestore';

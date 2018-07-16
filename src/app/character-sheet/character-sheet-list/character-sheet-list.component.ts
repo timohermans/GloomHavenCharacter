@@ -2,11 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection} from 'angularfire2/firestore';
 import * as _ from 'lodash';
 
-import {CharacterSheetFactory, Character} from '../character-sheet/character-sheet-template.factory';
+import {CharacterSheetFactory, Character} from '../shared/character-sheet-template.factory';
 import {Observable} from 'rxjs';
-import {CharacterSheet} from '../character-sheet/character-sheet.class';
-import {StorageService} from '../storage/storage.service';
-import {CharacterSheetService} from '../character-sheet/character-sheet.service';
+import {CharacterSheet} from '../shared/character-sheet.class';
+import {StorageService} from '../../storage/storage.service';
+import {CharacterSheetService} from '../shared/character-sheet.service';
 
 interface CharacterTemplate {
   character: string;
@@ -14,10 +14,10 @@ interface CharacterTemplate {
 
 @Component({
   selector: 'app-players',
-  templateUrl: './sheets.component.html',
-  styleUrls: ['./sheets.component.scss']
+  templateUrl: './character-sheet-list.component.html',
+  styleUrls: ['./character-sheet-list.component.scss']
 })
-export class SheetsComponent implements OnInit {
+export class CharacterSheetListComponent implements OnInit {
   isSheetCreationOpen = false;
   characterTemplates: CharacterTemplate[] = [];
   sheetsCollection: AngularFirestoreCollection<CharacterSheet>;

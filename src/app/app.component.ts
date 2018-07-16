@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import * as _ from 'lodash';
 
-import {routerTransition} from './router/router.animation';
 import {animations} from './app.animations';
 import {StorageService} from './storage/storage.service';
 

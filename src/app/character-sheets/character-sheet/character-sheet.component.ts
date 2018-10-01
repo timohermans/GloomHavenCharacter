@@ -109,18 +109,6 @@ export class CharacterSheetComponent implements OnInit {
         this.isSheetChangedFromInsideApplication = true;
         this.characterSheetDoc.update(data);
       });
-
-    this.perkFormChangeSubscription = this.form.controls.perks.valueChanges
-      .subscribe(() => {
-        if (_.some(this.form.controls.challengeSuccesses.value, c => c === false)) {
-          return;
-        }
-        const oldAmountOfPerksUnlocked = _.clone(this.amountOfPerksUnlocked);
-        this.countAmountOfPerksUnlocked();
-        if (oldAmountOfPerksUnlocked < this.amountOfPerksUnlocked) {
-          this.form.controls.challengeSuccesses.setValue([false, false, false]);
-        }
-      });
   }
 
   private loadDataIntoForm() {
@@ -139,8 +127,7 @@ export class CharacterSheetComponent implements OnInit {
     });
 
     if (this.characterSheet.challengeSuccesses) {
-      const challengeSuccessesFormArray = this.formBuilder.array(this.characterSheet.challengeSuccesses);
-      this.form.setControl('challengeSuccesses', challengeSuccessesFormArray);
+      this.createChallengeSuccessesForm(this.characterSheet.challengeSuccesses);
     }
 
     if (this.characterSheet.perks) {
@@ -148,6 +135,25 @@ export class CharacterSheetComponent implements OnInit {
       const perksFormArray = this.formBuilder.array(perks);
       this.form.setControl('perks', perksFormArray);
     }
+  }
+
+  private createChallengeSuccessesForm(challengeSuccesses: boolean[]): void {
+      if (_.every(challengeSuccesses, success => success === true)) {
+        challengeSuccesses = [...challengeSuccesses, false];
+      }
+
+      const challengeSuccessesFormArray = this.formBuilder.array(challengeSuccesses);
+      this.form.setControl('challengeSuccesses', challengeSuccessesFormArray);
+
+      if (this.perkFormChangeSubscription) {
+        this.perkFormChangeSubscription.unsubscribe();
+      }
+
+      this.perkFormChangeSubscription = this.form.controls.challengeSuccesses.valueChanges
+        .subscribe((successes) => {
+          this.createChallengeSuccessesForm(successes);
+        });
+
   }
 
   public get isUnableToUnlockPerk() {

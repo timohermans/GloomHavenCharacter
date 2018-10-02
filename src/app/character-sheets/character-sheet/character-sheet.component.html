@@ -55,6 +55,7 @@
       </div>
 
       <div *ngIf="isCurrent('perks')">
+        <h5>Perks</h5>
         <div class="form-group" formArrayName="perks">
           <div class="perk" *ngFor="let perk of form.controls.perks.controls; let i = index" [formGroupName]="i">
             <label>
@@ -63,8 +64,9 @@
           </div>
         </div>
 
+        <h5>Dungeon goals success</h5>
         <div class="form-group" formArrayName="challengeSuccesses">
-          <div *ngFor="let challengeSuccess of form.controls.challengeSuccesses.controls; let i = index">
+          <div *ngFor="let challengeSuccess of challengeSuccessFormArray.controls; let i = index">
             <input type="checkbox" [formControl]="challengeSuccess">
           </div>
         </div>

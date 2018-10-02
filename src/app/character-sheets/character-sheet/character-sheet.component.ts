@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormGroup, FormBuilder, Validators} from '@angular/forms';
+import {FormGroup, FormBuilder, Validators, FormArray} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {flatMap, debounceTime, filter} from 'rxjs/operators';
 import * as _ from 'lodash';
@@ -10,13 +10,11 @@ import {animations} from './character-sheet.animations';
 import {AngularFirestoreDocument, AngularFirestore} from 'angularfire2/firestore';
 import {Subscription} from 'rxjs';
 
-
-
 @Component({
   selector: 'app-character-sheet',
   templateUrl: './character-sheet.component.html',
   styleUrls: ['./character-sheet.component.scss'],
-  animations: animations
+  animations: animations,
 })
 export class CharacterSheetComponent implements OnInit {
   currentTabName = 'general';
@@ -30,14 +28,18 @@ export class CharacterSheetComponent implements OnInit {
   private entireFormChangeSubscription: Subscription;
   private perkFormChangeSubscription: Subscription;
 
-
   private amountOfPerksUnlocked = 0;
   xpPerLevel: number[];
+
+  public get challengeSuccessFormArray(): FormArray {
+    return this.form.controls.challengeSuccesses as FormArray;
+  }
 
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private db: AngularFirestore) {}
+    private db: AngularFirestore
+  ) {}
 
   ngOnInit() {
     this.buildSheetForm();
@@ -48,13 +50,14 @@ export class CharacterSheetComponent implements OnInit {
   }
 
   private loadDataFromParam() {
-    this.route.paramMap.pipe(
-      flatMap(params => {
-        const docId = params.get('id');
-        this.characterSheetDoc = this.db.doc<CharacterSheet>(`sheets/${docId}`);
-        return this.characterSheetDoc.valueChanges();
-      })
-    )
+    this.route.paramMap
+      .pipe(
+        flatMap(params => {
+          const docId = params.get('id');
+          this.characterSheetDoc = this.db.doc<CharacterSheet>(`sheets/${docId}`);
+          return this.characterSheetDoc.valueChanges();
+        })
+      )
       .subscribe(sheet => {
         if (!this.isSheetChangedFromInsideApplication) {
           this.characterSheet = sheet as CharacterSheet;
@@ -75,9 +78,7 @@ export class CharacterSheetComponent implements OnInit {
       itemNotes: [''],
       email: [''],
       perks: this.formBuilder.array([]),
-      challengeSuccesses: this.formBuilder.array([
-        false, false, false
-      ])
+      challengeSuccesses: this.formBuilder.array([false, false, false]),
     });
   }
 
@@ -85,12 +86,11 @@ export class CharacterSheetComponent implements OnInit {
     this.xpPerLevel = [0, 45, 95, 150, 210, 275, 345, 420, 500];
   }
 
-
   private countAmountOfPerksUnlocked() {
     this.amountOfPerksUnlocked = 0;
     const perks = this.form.controls.perks.value;
 
-    _.each(perks, (perk) => {
+    _.each(perks, perk => {
       if (perk.hasObtained) {
         this.amountOfPerksUnlocked += 1;
       }
@@ -105,7 +105,7 @@ export class CharacterSheetComponent implements OnInit {
           return !_.isEqual(data, this.characterSheet);
         })
       )
-      .subscribe((data) => {
+      .subscribe(data => {
         this.isSheetChangedFromInsideApplication = true;
         this.characterSheetDoc.update(data);
       });
@@ -123,7 +123,7 @@ export class CharacterSheetComponent implements OnInit {
       experiencePointsNotes: this.characterSheet.experiencePointsNotes,
       gold: this.characterSheet.gold,
       itemNotes: this.characterSheet.itemNotes,
-      email: this.characterSheet.email
+      email: this.characterSheet.email,
     });
 
     if (this.characterSheet.challengeSuccesses) {
@@ -138,22 +138,22 @@ export class CharacterSheetComponent implements OnInit {
   }
 
   private createChallengeSuccessesForm(challengeSuccesses: boolean[]): void {
-      if (_.every(challengeSuccesses, success => success === true)) {
-        challengeSuccesses = [...challengeSuccesses, false];
+    if (_.every(challengeSuccesses, success => success === true)) {
+      challengeSuccesses = [...challengeSuccesses, false];
+    }
+
+    const challengeSuccessesFormArray = this.formBuilder.array(challengeSuccesses);
+    this.form.setControl('challengeSuccesses', challengeSuccessesFormArray);
+
+    if (this.perkFormChangeSubscription) {
+      this.perkFormChangeSubscription.unsubscribe();
+    }
+
+    this.perkFormChangeSubscription = this.form.controls.challengeSuccesses.valueChanges.subscribe(
+      successes => {
+        this.createChallengeSuccessesForm(successes);
       }
-
-      const challengeSuccessesFormArray = this.formBuilder.array(challengeSuccesses);
-      this.form.setControl('challengeSuccesses', challengeSuccessesFormArray);
-
-      if (this.perkFormChangeSubscription) {
-        this.perkFormChangeSubscription.unsubscribe();
-      }
-
-      this.perkFormChangeSubscription = this.form.controls.challengeSuccesses.valueChanges
-        .subscribe((successes) => {
-          this.createChallengeSuccessesForm(successes);
-        });
-
+    );
   }
 
   public get isUnableToUnlockPerk() {
@@ -180,7 +180,7 @@ export class CharacterSheetComponent implements OnInit {
     const positionModifier = 0.664;
     const xp = this.form.controls.experiencePoints.value;
 
-    const position = base + (positionModifier * xp);
+    const position = base + positionModifier * xp;
 
     return `${position}px`;
   }

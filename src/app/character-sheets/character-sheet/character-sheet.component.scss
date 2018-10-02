@@ -1,7 +1,7 @@
 @import '../../../scss/variables';
 
 nav {
-  background-color:$white;
+  background-color: $white;
   padding: 0;
   height: 56px;
   line-height: 36px;
@@ -20,7 +20,6 @@ nav {
     border-top-width: 2px;
     border-top-color: $primary;
     border-top-style: solid;
-
   }
 }
 
@@ -49,7 +48,7 @@ h2 {
     height: 15px;
 
     i {
-      position:absolute;
+      position: absolute;
     }
   }
 
@@ -58,6 +57,11 @@ h2 {
   }
 }
 
+[formArrayName='challengeSuccesses'] {
+  display: flex;
+  flex-wrap: wrap;
 
-
-
+  > div {
+    margin-right: 18px;
+  }
+}

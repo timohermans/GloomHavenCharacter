@@ -27,6 +27,14 @@
       </div>
     </div>
 
+    <div class="beast-icon" [class.active]="isBeastHpVisible" (click)="toggleBeastHp()"></div>
+
+    <div class="counter-card" *ngIf="isBeastHpVisible">
+      <div class="form-group">
+        <app-custom-counter labelText="HP" id="divBeastHp" formControlName="hpBeast"></app-custom-counter>
+      </div>
+    </div>
+
     <div class="action-float">
       <a class="btn btn-lg btn-primary btn-float" routerLink="/transfer">
         <span class="fas fa-save"></span>

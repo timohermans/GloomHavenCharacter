@@ -24,3 +24,28 @@
         }
     }
 }
+
+//.beast-icon {
+//  width: 150px;
+//  height: 150px;
+//  background: url('/assets/images/g-icons.jpg') -900px -55px;
+//}
+
+.beast-icon {
+  background: url('/assets/images/g-icons.jpg') -227px -14px;
+  background-size: 375px 270px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+  margin-bottom: 10px;
+
+  &:hover {
+    cursor: pointer;
+    border: 1px solid var(--primary);
+  }
+
+  &.active {
+    border: 1px solid var(--primary);
+  }
+}

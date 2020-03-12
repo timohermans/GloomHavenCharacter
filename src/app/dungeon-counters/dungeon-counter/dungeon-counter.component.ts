@@ -10,13 +10,16 @@ import {debounceTime} from 'rxjs/operators';
   styleUrls: ['./dungeon-counter.component.scss']
 })
 export class DungeonCounterComponent implements OnInit {
+  public isBeastHpVisible = false;
+
   form: FormGroup;
 
   private defaultFormValues = {
     hp: 0,
     xp: 0,
     tokens: 0,
-    kills: 0
+    kills: 0,
+    hpBeast: 0
   };
 
   constructor(private formBuilder: FormBuilder) {}
@@ -54,5 +57,9 @@ export class DungeonCounterComponent implements OnInit {
   reset() {
     this.form.reset(this.defaultFormValues);
     sessionStorage.removeItem(DungeonStorageKey);
+  }
+
+  public toggleBeastHp() {
+    this.isBeastHpVisible = !this.isBeastHpVisible;
   }
 }

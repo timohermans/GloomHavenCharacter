@@ -24,6 +24,7 @@ import {TransferComponent} from './dungeon-counters/transfer/transfer.component'
 import {CharacterSheetService} from './character-sheets/shared/character-sheet.service';
 import {HistoryComponent} from './character-sheets/history/history.component';
 import { HistoryService } from './character-sheets/shared/history.service';
+import { IconReplaceDirective } from './character-sheets/shared/icon-replace.directive';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { HistoryService } from './character-sheets/shared/history.service';
     LoginComponent,
     DungeonCounterComponent,
     ConfirmButtonComponent,
-    TransferComponent
+    TransferComponent,
+    IconReplaceDirective
   ],
   imports: [
     BrowserModule,

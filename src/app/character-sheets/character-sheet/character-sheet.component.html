@@ -59,7 +59,7 @@
         <div class="form-group" formArrayName="perks">
           <div class="perk" *ngFor="let perk of form.controls.perks.controls; let i = index" [formGroupName]="i">
             <label>
-              <input type="checkbox" formControlName="hasObtained"> {{perk.controls.description.value}}
+              <input type="checkbox" formControlName="hasObtained"> <div class="perk-text" appIconReplace>{{perk.controls.description.value}}</div>
             </label>
           </div>
         </div>

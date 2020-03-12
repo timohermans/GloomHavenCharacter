@@ -8,7 +8,8 @@ export enum Character {
   Quartermaster,
   Summoner,
   Soothsinger,
-  Elementalist
+  Elementalist,
+  BeastTyrant
 }
 
 export class CharacterSheetFactory {
@@ -30,6 +31,8 @@ export class CharacterSheetFactory {
         return this._buildSoothsinger();
       case Character.Elementalist:
         return this._buildElementalist();
+      case Character.BeastTyrant:
+        return this._buildBeastTyrant();
       default:
         throw new Error(`factory doesn't support ${character}`);
     }
@@ -264,6 +267,35 @@ export class CharacterSheetFactory {
         {description: `Add one '+1' WOUND'wound' card`, hasObtained: false},
         {description: `Add one '+0' STUN'stun' card`, hasObtained: false},
         {description: `Add one '+0' ADD TARGET'target' card`, hasObtained: false}
+      ],
+    };
+  }
+
+  private static _buildBeastTyrant() {
+    return {
+      title: 'Vermling Beast Tyrant',
+      name: '',
+      experiencePoints: 0,
+      experiencePointsNotes: '',
+      gold: 0,
+      itemNotes: '',
+      challengeSuccesses: [false, false, false],
+      perks: [
+        {description: `Remove two '-1' cards`, hasObtained: false},
+        {description: `Replace one '-1' card with one '+1' card`, hasObtained: false},
+        {description: `Replace one '-1' card with one '+1' card`, hasObtained: false},
+        {description: `Replace one '-1' card with one '+1' card`, hasObtained: false},
+        {description: `Replace one '+0' card with one '+2' card`, hasObtained: false},
+        {description: `Replace one '+0' card with one '+2' card`, hasObtained: false},
+        {description: `Add one '+1' WOUND'wound' card`, hasObtained: false},
+        {description: `Add one '+1' WOUND'wound' card`, hasObtained: false},
+        {description: `Add one '+1'IMMOBILIZE'immobilize' card`, hasObtained: false},
+        {description: `Add one '+1'IMMOBILIZE'immobilize' card`, hasObtained: false},
+        {description: `Add two 'draw' Heal'heal'1 cards`, hasObtained: false},
+        {description: `Add two 'draw' Heal'heal'1 cards`, hasObtained: false},
+        {description: `Add two 'draw' Heal'heal'1 cards`, hasObtained: false},
+        {description: `Add two 'draw''leaf' cards`, hasObtained: false},
+        {description: `Ignore negative scenario effects`, hasObtained: false}
       ],
     };
   }

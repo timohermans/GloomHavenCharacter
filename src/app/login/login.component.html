@@ -2,7 +2,7 @@
 
 <div class="container login">
 
-    <form [formGroup]="form" (submit)="login()">
+    <form [formGroup]="form" (submit)="login($event)">
         <div class="form-group">
             <input type="text" class="form-control no-border" formControlName="username" placeholder="Username">
         </div>
@@ -14,5 +14,9 @@
         <div class="form-group">
             <button class="btn btn-primary" type="submit" [disabled]="!form.valid">Log in</button>
         </div>
+
+      <div *ngIf="errorMessage" class="form-group alert alert-danger">
+        {{ errorMessage}}
+      </div>
     </form>
 </div>

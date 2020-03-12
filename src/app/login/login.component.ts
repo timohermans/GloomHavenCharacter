@@ -17,6 +17,7 @@ interface LoginViewModel {
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  public errorMessage: string;
   form: FormGroup;
 
   constructor(private storageService: StorageService, private formBuilder: FormBuilder, private router: Router) {
@@ -36,12 +37,16 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  login(): void {
+  login(event): void {
+    event.preventDefault();
     const loginValue = this.form.value as LoginViewModel;
 
     this.storageService.login(loginValue.username, loginValue.password)
       .then((response) => {
         this.router.navigate(['/sheets']);
+      })
+      .catch(error => {
+        this.errorMessage = error.message;
       });
   }
 }

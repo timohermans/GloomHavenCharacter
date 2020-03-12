@@ -7,7 +7,8 @@ export enum Character {
   Tinkerer,
   Quartermaster,
   Summoner,
-  Soothsinger
+  Soothsinger,
+  Elementalist
 }
 
 export class CharacterSheetFactory {
@@ -27,6 +28,8 @@ export class CharacterSheetFactory {
         return this._buildSummoner();
       case Character.Soothsinger:
         return this._buildSoothsinger();
+      case Character.Elementalist:
+        return this._buildElementalist();
       default:
         throw new Error(`factory doesn't support ${character}`);
     }
@@ -232,6 +235,35 @@ export class CharacterSheetFactory {
         {description: `Add one 'draw''fire' and one 'draw''wind' card`, hasObtained: false},
         {description: `Add one 'draw''dark' and one 'draw''leaf' card`, hasObtained: false},
         {description: `Ignore negative scenario effects and add two '+1' cards`, hasObtained: false},
+      ],
+    };
+  }
+
+  private static _buildElementalist() {
+    return {
+      title: 'Savvas Elementalist',
+      name: '',
+      experiencePoints: 0,
+      experiencePointsNotes: '',
+      gold: 0,
+      itemNotes: '',
+      challengeSuccesses: [false, false, false],
+      perks: [
+        {description: `Remove two '-1' cards`, hasObtained: false},
+        {description: `Remove two '-1' cards`, hasObtained: false},
+        {description: `Replace one '-1' card with one '+1' card`, hasObtained: false},
+        {description: `Replace one '+0' card with one '+2' card`, hasObtained: false},
+        {description: `Replace one '+0' card with one '+2' card`, hasObtained: false},
+        {description: `Add three '+0''fire' cards`, hasObtained: false},
+        {description: `Add three '+0''ice' cards`, hasObtained: false},
+        {description: `Add three '+0''wind' cards`, hasObtained: false},
+        {description: `Add three '+0''leaf' cards`, hasObtained: false},
+        {description: `Replace two '+0' cards with one '+0''fire' and one '+0''leaf' card`, hasObtained: false},
+        {description: `Replace two '+0' cards with one '+0''ice' and one '+0''wind' card`, hasObtained: false},
+        {description: `Add two '+1' PUSH'push' 1 cards`, hasObtained: false},
+        {description: `Add one '+1' WOUND'wound' card`, hasObtained: false},
+        {description: `Add one '+0' STUN'stun' card`, hasObtained: false},
+        {description: `Add one '+0' ADD TARGET'target' card`, hasObtained: false}
       ],
     };
   }

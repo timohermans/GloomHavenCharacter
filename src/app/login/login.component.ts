@@ -38,6 +38,7 @@ export class LoginComponent implements OnInit {
   }
 
   login(event): void {
+    this.errorMessage = null;
     event.preventDefault();
     const loginValue = this.form.value as LoginViewModel;
 
